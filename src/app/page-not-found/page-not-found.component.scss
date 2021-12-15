@@ -9,13 +9,14 @@ img{
     display: block;
 }
 
+.dFlex{
+    display: flex;
+    flex-direction: column;
+}
+
 .center{
-    margin: 0 auto;
-    margin-top: 50px;
-    display: block;
-    font-size: 2.5vw;
-    height: 4vw;
-    width: 35vw;
-    padding-top: 1vw;
-    min-height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    display: inline-block;
 }
