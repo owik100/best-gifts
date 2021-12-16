@@ -7,3 +7,12 @@ a{
     text-decoration: none;
     color: white;
 }
+
+#globalContainer {
+    min-height:100%;
+    position:relative;
+ }
+
+ .mainContent{
+    padding-bottom:60px;
+ }
