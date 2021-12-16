@@ -8,6 +8,11 @@ a{
     color: white;
 }
 
+a:hover{
+    text-decoration: none;
+    color: white;
+}
+
 #globalContainer {
     min-height:100%;
     position:relative;
