@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { version } from '../../package.json';
+import { version } from '../../../package.json';
 
 @Component({
   selector: 'app-footer',
@@ -10,7 +10,7 @@ import { version } from '../../package.json';
 export class FooterComponent implements OnInit {
   faGithub = faGithub;
 
-  appVersion = '0.0';
+  appVersion = version;
   currYear = new Date().getFullYear();
 
   constructor() {
