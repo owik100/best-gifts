@@ -1,10 +1,16 @@
 <footer>
     
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-        <div class="col">Best gifts</div>
-      <div class="col">2021</div>
-      <div class="col">Github</div>
+        <div class="col">
+          <p>Best gifts v.{{appVersion}}  {{currYear}}</p>
+        </div>
+      <div class="col">
+        <a href="https://github.com/owik100/best-gifts-angular-client" target="_blank">
+          <fa-icon class="float-end" [icon]="faGithub"></fa-icon>
+          <p class="float-end me-2">Github owik100</p>
+        </a>
+      </div>
     </div>
   </div>
 </footer>
