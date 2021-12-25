@@ -1,1 +1,6 @@
 <p>gifts-list works!</p>
+
+
+<div *ngFor="let giftIdea of giftIdeas | async">
+    <p>{{giftIdea.name}}</p>
+</div>
