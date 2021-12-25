@@ -16,7 +16,12 @@ private urlAPI = 'https://localhost:44302/api';
    }
 
    getAllGifts(): Observable<GiftIdea[]>{
-    return this.http.get<GiftIdea[]>(this.urlAPI + '/GiftIdeas').
+    return this.http.get<GiftIdea[]>(this.urlAPI + '/GiftIdeas/GetAll').
+    pipe(tap(console.log));
+   }
+
+   checkServerStatus(): Observable<any>{
+    return this.http.get<any>(this.urlAPI + '/GiftIdeas/Online', {observe: 'response'}).
     pipe(tap(console.log));
    }
 }
