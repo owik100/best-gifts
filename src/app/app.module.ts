@@ -15,6 +15,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { FooterComponent } from './footer/footer.component';
 import { GiftsListComponent } from './gifts-list/gifts-list.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { StatusServerComponent } from './navbar/status-server/status-server.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     HomeComponent,
     PageNotFoundComponent,
     FooterComponent,
-    GiftsListComponent
+    GiftsListComponent,
+    StatusServerComponent
   ],
   imports: [
     BrowserModule,

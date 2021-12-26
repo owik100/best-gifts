@@ -5,9 +5,9 @@
             <span>Best Gifts</span>
         </a>
         <span class="spacer"></span>
-        <span>Status Server </span>
 
-        <span *ngIf=statusAPI>OK</span>
+        <app-status-server [statusAPI] ="statusAPI"></app-status-server>
+
     </mat-toolbar>
 
 </nav>
