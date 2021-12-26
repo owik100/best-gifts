@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 // Own components
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -36,6 +37,7 @@ import { StatusServerComponent } from './navbar/status-server/status-server.comp
     MatToolbarModule,
     MatButtonModule,
     MatTooltipModule,
+    MatProgressSpinnerModule,
     HttpClientModule,
   ],
   providers: [],

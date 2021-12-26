@@ -1,6 +1,14 @@
-<p>gifts-list works!</p>
+<div class="container">
 
-
-<div *ngFor="let giftIdea of giftIdeas | async">
-    <p>{{giftIdea.name}}</p>
+<div *ngIf = '(giftIdeas | async) as ideas else loading'>
+    <div *ngFor="let giftIdea of ideas">
+        <p>{{giftIdea.name}}</p>
+    </div>
 </div>
+
+
+    <ng-template #loading>
+        <mat-spinner></mat-spinner>
+      </ng-template>
+</div>
+

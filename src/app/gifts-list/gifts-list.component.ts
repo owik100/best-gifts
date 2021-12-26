@@ -10,9 +10,11 @@ import { HttpGiftsService } from '../services/http-gifts.service';
 })
 export class GiftsListComponent implements OnInit, OnDestroy {
   giftIdeas: Observable<GiftIdea[]>;
+  loading = false;
   constructor(private http: HttpGiftsService) { }
 
   ngOnInit(): void {
+    this.loading = true;
     this.giftIdeas = this.http.getAllGifts();
     // const res = this.giftIdeas.subscribe(
     //   data => {},
