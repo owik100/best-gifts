@@ -3,6 +3,7 @@ import { faGifts, faLeaf } from '@fortawesome/free-solid-svg-icons';
 import { interval, Observable } from 'rxjs';
 import { HttpGiftsService } from '../services/http-gifts.service';
 
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',

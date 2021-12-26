@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 // Angular material
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
+import {MatTooltipModule} from '@angular/material/tooltip';
 // Own components
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -34,6 +35,7 @@ import { StatusServerComponent } from './navbar/status-server/status-server.comp
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
+    MatTooltipModule,
     HttpClientModule,
   ],
   providers: [],
