@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faGifts, faLeaf } from '@fortawesome/free-solid-svg-icons';
-import { Observable } from 'rxjs';
+import { interval, Observable } from 'rxjs';
 import { HttpGiftsService } from '../services/http-gifts.service';
 
 @Component({
@@ -12,15 +12,24 @@ export class NavbarComponent implements OnInit {
   faGifts = faGifts;
   statusAPI: boolean;
 
+  private source = interval(5000);
+
   constructor(private http: HttpGiftsService) { }
 
   ngOnInit(): void {
-    setInterval(() => {
-      this.http.checkServerStatus().subscribe(
-        data => this.statusAPI = data.ok,
-        err => this.statusAPI = false,
-      );
-    }, 3000);
+    this.checkServerStatus(),
+
+      setInterval(() => {
+        this.checkServerStatus();
+      }, 5000);
+
+  }
+
+  checkServerStatus(): void {
+    this.http.checkServerStatus().subscribe(
+      data => this.statusAPI = data.ok,
+      err => this.statusAPI = false,
+    );
   }
 
 }
