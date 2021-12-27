@@ -11,6 +11,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatCardModule} from '@angular/material/card';
+import {MatChipsModule} from '@angular/material/chips';
 // Own components
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -38,6 +40,8 @@ import { StatusServerComponent } from './navbar/status-server/status-server.comp
     MatButtonModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
+    MatCardModule,
+    MatChipsModule,
     HttpClientModule,
   ],
   providers: [],
