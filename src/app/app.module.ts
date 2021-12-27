@@ -20,6 +20,7 @@ import { FooterComponent } from './footer/footer.component';
 import { GiftsListComponent } from './gifts-list/gifts-list.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { StatusServerComponent } from './navbar/status-server/status-server.component';
+import { SingleGiftComponent } from './gifts-list/single-gift/single-gift.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { StatusServerComponent } from './navbar/status-server/status-server.comp
     PageNotFoundComponent,
     FooterComponent,
     GiftsListComponent,
-    StatusServerComponent
+    StatusServerComponent,
+    SingleGiftComponent
   ],
   imports: [
     BrowserModule,
