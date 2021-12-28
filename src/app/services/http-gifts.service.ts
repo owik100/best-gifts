@@ -20,6 +20,11 @@ private urlAPI = 'https://localhost:44302/api';
     pipe(tap(console.log));
    }
 
+   getGift(id: string): Observable<GiftIdea>{
+    return this.http.get<GiftIdea>(this.urlAPI + '/GiftIdeas/Get/' + id).
+    pipe(tap(console.log));
+   }
+
    checkServerStatus(): Observable<any>{
     return this.http.get<any>(this.urlAPI + '/GiftIdeas/Online', {observe: 'response'}).
     pipe(tap(console.log));
