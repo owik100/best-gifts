@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { GiftIdea } from 'src/app/models/giftIdea';
@@ -18,10 +18,12 @@ export class SingleGiftComponent implements OnInit, OnDestroy {
 
   idFromRoute: string;
   isLoading = false;
-  isError = false;
+  is404Error = false;
+  isAnotherError = false;
 
 
-  constructor(private http: HttpGiftsService, private route: ActivatedRoute) { }
+  constructor(private http: HttpGiftsService, private route: ActivatedRoute, private router: Router)
+  { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe( paramMap => {
@@ -33,7 +35,18 @@ export class SingleGiftComponent implements OnInit, OnDestroy {
 
     this.singleGiftSubscription = this.singleGiftObservable.subscribe(
         data => {this.singleGift = data; this.isLoading = false; },
-        err => {(console.log('ERROR', err)); this.isLoading = false; this.isError = true; },
+        err => {
+          (console.log('ERROR', err));
+          this.isLoading = false;
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 404){
+              this.is404Error = true;
+            }
+            else {
+              this.isAnotherError = true;
+            }
+          }
+        },
         () => console.log('KONIEC', this.singleGift, this.singleGiftSubscription));
   }
 

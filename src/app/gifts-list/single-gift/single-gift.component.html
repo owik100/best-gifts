@@ -37,7 +37,7 @@
    
 </div>
 
-
+<!-- Zamienić na switcha -->
   <ng-template #pending>
     <ng-container *ngIf="isLoading; then loading; else problem;"></ng-container>
   </ng-template>
@@ -48,7 +48,15 @@
   </ng-template>
 
   <ng-template #problem>
-    <h1>PROBLEM</h1>
+    <ng-container *ngIf="is404Error; then temp404Error; else tempAnotherError;"></ng-container>
+  </ng-template>
+
+  <ng-template #temp404Error>
+    <app-page-not-found></app-page-not-found>
+  </ng-template>
+
+  <ng-template #tempAnotherError>
+        <app-another-error></app-another-error>
   </ng-template>
 
   

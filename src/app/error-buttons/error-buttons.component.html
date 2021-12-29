@@ -1,0 +1,5 @@
+<div class="dFlex">
+    <button mat-raised-button class="center"  color="primary" (click) ="backToLastPage()"><fa-icon [icon]="faArrowCircleLeft"></fa-icon>   Wróć</button>
+    <a mat-raised-button color="primary" routerLink="/" class="center" ><fa-icon [icon]="faHome"></fa-icon>   Strona główna</a>
+    <button *ngIf="allowRefresh" mat-raised-button class="center"  color="primary" (click) ="reloadComponent()"><fa-icon [icon]="faSync"></fa-icon>   Odśwież</button>
+</div>

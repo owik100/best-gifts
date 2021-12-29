@@ -24,6 +24,8 @@ import { GiftsListComponent } from './gifts-list/gifts-list.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { StatusServerComponent } from './navbar/status-server/status-server.component';
 import { SingleGiftComponent } from './gifts-list/single-gift/single-gift.component';
+import { AnotherErrorComponent } from './another-error/another-error.component';
+import { ErrorButtonsComponent } from './error-buttons/error-buttons.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { SingleGiftComponent } from './gifts-list/single-gift/single-gift.compon
     FooterComponent,
     GiftsListComponent,
     StatusServerComponent,
-    SingleGiftComponent
+    SingleGiftComponent,
+    AnotherErrorComponent,
+    ErrorButtonsComponent
   ],
   imports: [
     BrowserModule,
