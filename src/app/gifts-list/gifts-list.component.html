@@ -10,7 +10,7 @@
                     </mat-card-title>
                     <mat-card-subtitle>Autor: {{giftIdea.author}}</mat-card-subtitle>
                   </mat-card-header>
-                  <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+                  <img class="img-fluid" mat-card-image src="/assets/images/gift.png" alt="Gift image"/>
                   <mat-card-content>
                     <p>
                       {{giftIdea.description}}
@@ -23,9 +23,9 @@
                         <mat-chip>{{category.category.name}}</mat-chip>
                       </div>
                     </mat-chip-list>
-                    <button mat-button>LIKE</button>
-                    <button mat-button>SHARE</button>
+
                   </mat-card-actions>
+                  <span matBadge={{giftIdea.likesCounter}} matBadgeSize="large" matBadgeColor="primary" matBadgeOverlap="false">Polubienia</span>
                 </mat-card>
 
 

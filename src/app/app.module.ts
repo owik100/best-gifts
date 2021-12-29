@@ -13,6 +13,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatListModule} from '@angular/material/list';
 // Own components
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -44,7 +47,10 @@ import { SingleGiftComponent } from './gifts-list/single-gift/single-gift.compon
     MatProgressSpinnerModule,
     MatCardModule,
     MatChipsModule,
+    MatDividerModule,
+    MatBadgeModule,
     HttpClientModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

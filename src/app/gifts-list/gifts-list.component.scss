@@ -6,14 +6,6 @@
     align-items: center;
 }
 
-mat-spinner {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 5;
-}
-
 .card-content {
     max-width: 400px;
     max-height: 500px;
@@ -27,4 +19,8 @@ mat-spinner {
 a:hover{
     text-decoration: none;
     color: black;
+}
+
+img{
+    max-width: 300px;
 }

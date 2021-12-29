@@ -1,1 +1,54 @@
-<p>single-gift works!</p>
+<div *ngIf="singleGift; else pending">
+  <h1 class="mat-display-2">{{singleGift.name}}</h1>
+  <div class="container px-4">
+    <div class="row gy-3 gx-5">
+      <div class="col"> 
+        <img class="img-fluid" mat-card-image src="/assets/images/gift.png" alt="Gift image"/>
+      </div>
+      <div class="col"> 
+        <h1 class="mat-display-5">Autor: {{singleGift.author}}</h1>
+        <h2>{{singleGift.description}}</h2>
+        <mat-divider></mat-divider>
+        <p>Kategorie:</p>
+        <mat-chip-list aria-label="Fish selection">
+          <div *ngFor="let category of singleGift.giftIdeaCategory">
+            <mat-chip>{{category.category.name}}</mat-chip>
+          </div>
+        </mat-chip-list>
+        <mat-divider></mat-divider>
+
+        <button mat-raised-button color="primary">Like</button>
+        <button mat-raised-button color="warn">Dislike</button>
+
+        <span matBadge={{singleGift.likesCounter}} matBadgeSize="large" matBadgeColor="primary" matBadgeOverlap="false">Polubienia</span>
+
+        <button mat-button>SHARE</button>
+
+      </div>
+    </div>
+    </div>
+    <mat-divider></mat-divider>
+    <mat-list *ngFor="let comment of singleGift.comments" role="list">
+      <mat-list-item role="listitem">
+        <i>{{comment.commentAuthor}}:</i>
+        <span style="margin-left: 5px;">{{comment.commentContent}}</span>
+      </mat-list-item>
+    </mat-list>
+   
+</div>
+
+
+  <ng-template #pending>
+    <ng-container *ngIf="isLoading; then loading; else problem;"></ng-container>
+  </ng-template>
+
+  
+  <ng-template #loading>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+
+  <ng-template #problem>
+    <h1>PROBLEM</h1>
+  </ng-template>
+
+  

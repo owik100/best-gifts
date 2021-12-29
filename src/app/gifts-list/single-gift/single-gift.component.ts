@@ -14,9 +14,12 @@ import { HttpGiftsService } from 'src/app/services/http-gifts.service';
 export class SingleGiftComponent implements OnInit, OnDestroy {
   singleGiftObservable: Observable<GiftIdea>;
   singleGiftSubscription: Subscription;
-  singleGift: GiftIdea;
+  singleGift: GiftIdea = null;
 
   idFromRoute: string;
+  isLoading = false;
+  isError = false;
+
 
   constructor(private http: HttpGiftsService, private route: ActivatedRoute) { }
 
@@ -26,10 +29,11 @@ export class SingleGiftComponent implements OnInit, OnDestroy {
   });
 
     this.singleGiftObservable = this.http.getGift(this.idFromRoute);
+    this.isLoading = true;
 
     this.singleGiftSubscription = this.singleGiftObservable.subscribe(
-        data => {this.singleGift = data; },
-        err => console.log('ERROR', err),
+        data => {this.singleGift = data; this.isLoading = false; },
+        err => {(console.log('ERROR', err)); this.isLoading = false; this.isError = true; },
         () => console.log('KONIEC', this.singleGift, this.singleGiftSubscription));
   }
 
