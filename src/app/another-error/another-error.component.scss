@@ -1,3 +1,13 @@
+@import "../../variables.scss";
+
 h1{
     text-align: center;
+}
+
+fa-icon{
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    font-size: 150px;
+    color: $base-warn;
 }
