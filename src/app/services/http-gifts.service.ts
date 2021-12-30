@@ -17,7 +17,9 @@ private urlAPI = 'https://localhost:44302/api';
 
    getAllGifts(): Observable<GiftIdea[]>{
     return this.http.get<GiftIdea[]>(this.urlAPI + '/GiftIdeas/GetAll').
-    pipe(tap(console.log));
+    pipe(
+      tap(console.log)
+      );
    }
 
    getGift(id: string): Observable<GiftIdea>{
