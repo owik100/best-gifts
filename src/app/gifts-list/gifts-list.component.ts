@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscriber } from 'rxjs';
+import { Observable, of, Subscriber, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { GiftIdea } from '../models/giftIdea';
 import { HttpGiftsService } from '../services/http-gifts.service';
 
@@ -10,20 +11,22 @@ import { HttpGiftsService } from '../services/http-gifts.service';
 })
 export class GiftsListComponent implements OnInit, OnDestroy {
   giftIdeas: Observable<GiftIdea[]>;
-  loading = false;
+
+  public errorObject = null;
   constructor(private http: HttpGiftsService) { }
 
   ngOnInit(): void {
-    this.loading = true;
-    this.giftIdeas = this.http.getAllGifts();
-    // const res = this.giftIdeas.subscribe(
-    //   data => {},
-    //   err => console.log('ERROR', err),
-    //   () => console.log('KONIEC'));
-    }
+    this.giftIdeas = this.http.getAllGifts()
+      .pipe(
+        catchError(err => {
+          this.errorObject = err;
+          return throwError(err);
+        })
+      );
+  }
 
-    ngOnDestroy(): void{
-      console.log('GiftsListComponent destory');
-    }
+  ngOnDestroy(): void {
+    console.log('GiftsListComponent destory');
+  }
 
 }

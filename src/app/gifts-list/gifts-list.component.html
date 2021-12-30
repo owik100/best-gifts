@@ -1,4 +1,4 @@
-        <div *ngIf='(giftIdeas | async) as ideas else loading'>
+        <ng-container *ngIf='(giftIdeas | async) as ideas else pending'>
           <div class="container px-4">
             <div class="row gy-3 gx-5">
               <ng-container *ngFor="let giftIdea of ideas">
@@ -33,22 +33,21 @@
             </div>
           </div>
 
-        </div>
+        </ng-container>
 
 
 
 <!-- Zamienić na switcha -->
   <ng-template #pending>
-    <ng-container *ngIf="isLoading; then loading; else problem;"></ng-container>
+    <ng-container *ngIf="errorObject; then problem; else loading;"></ng-container>
   </ng-template>
 
-  
   <ng-template #loading>
     <mat-spinner></mat-spinner>
   </ng-template>
 
   <ng-template #problem>
-    <ng-container *ngIf="is404Error; then temp404Error; else tempAnotherError;"></ng-container>
+    <ng-container *ngIf="errorObject.status==404; then temp404Error; else tempAnotherError;"></ng-container>
   </ng-template>
 
   <ng-template #temp404Error>
