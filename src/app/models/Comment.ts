@@ -1,10 +1,10 @@
 import { GiftIdea } from './giftIdea';
 
 export interface Comment{
-    CommentId: number;
-    CommentContent: string;
-    CommentAuthor: string;
+    commentId: number;
+    commentContent: string;
+    commentAuthor: string;
 
-    GiftIdeaId: number;
-    GiftIdea: GiftIdea;
+    giftIdeaId: number;
+    giftIdea: GiftIdea;
 }

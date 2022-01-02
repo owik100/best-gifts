@@ -2,12 +2,14 @@ import { Comment } from './Comment';
 import { GiftIdeaCategory } from './GiftIdeaCategory';
 
 export interface GiftIdea{
-    GiftIdeaId: number;
-    Name: string;
-    Description: string;
-    Author: string;
-    LikesCounter: string;
+    giftIdeaId: number;
+    name: string;
+    description: string;
+    author: string;
+    likesCounter: string;
+    imageContentB64: string;
+    externalUrl: string;
 
-    Comments: Comment[];
-    GiftIdeaCategory: GiftIdeaCategory[];
+    comments: Comment[];
+    giftIdeaCategory: GiftIdeaCategory[];
 }

@@ -1,8 +1,8 @@
 import { GiftIdeaCategory } from './GiftIdeaCategory';
 
 export interface Category{
-    CategoryId: number;
-    Name: string;
+    categoryId: number;
+    name: string;
 
-    GiftIdeaCategory: GiftIdeaCategory[];
+    giftIdeaCategory: GiftIdeaCategory[];
 }
