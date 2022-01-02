@@ -5,6 +5,8 @@ import { Observable, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { GiftIdea } from 'src/app/models/giftIdea';
 import { HttpGiftsService } from 'src/app/services/http-gifts.service';
+import { ImageHelperService } from 'src/app/services/image-helper.service';
+
 
 @Component({
   selector: 'app-single-gift',
@@ -21,8 +23,8 @@ export class SingleGiftComponent implements OnInit, OnDestroy {
   is404Error = false;
   isAnotherError = false;
 
-
-  constructor(private http: HttpGiftsService, private route: ActivatedRoute, private router: Router)
+  // tslint:disable-next-line:max-line-length
+  constructor(private http: HttpGiftsService, private route: ActivatedRoute, private router: Router, private imageHelper: ImageHelperService)
   { }
 
   ngOnInit(): void {
@@ -33,8 +35,13 @@ export class SingleGiftComponent implements OnInit, OnDestroy {
     this.singleGiftObservable = this.http.getGift(this.idFromRoute);
     this.isLoading = true;
 
-    this.singleGiftSubscription = this.singleGiftObservable.subscribe(
-        data => {this.singleGift = data; this.isLoading = false; },
+    this.singleGiftSubscription = this.singleGiftObservable.
+    subscribe(
+        data => {
+          this.singleGift = data;
+          this.singleGift.imageContentB64 =  this.imageHelper.prepareBase64imagePrefix(data.imageContentB64);
+          this.isLoading = false;
+        },
         err => {
           (console.log('ERROR', err));
           this.isLoading = false;
@@ -53,5 +60,6 @@ export class SingleGiftComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.singleGiftSubscription .unsubscribe();
   }
+
 
 }

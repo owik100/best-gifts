@@ -10,7 +10,11 @@
                     </mat-card-title>
                     <mat-card-subtitle>Autor: {{giftIdea.author}}</mat-card-subtitle>
                   </mat-card-header>
-                  <img class="img-fluid" mat-card-image src="/assets/images/gift.png" alt="Gift image"/>
+                  <img *ngIf="giftIdea.imageContentB64; else defaultImage" src="{{giftIdea.imageContentB64}}"/>
+                  <ng-template #defaultImage>
+                    <img class="img-fluid" mat-card-image src="/assets/images/gift.png" alt="Gift image"/>
+                  </ng-template>
+
                   <mat-card-content>
                     <p>
                       {{giftIdea.description}}
