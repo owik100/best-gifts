@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, of, Subscriber, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { GiftIdea } from '../models/giftIdea';
+import { GiftIdeaDTO } from '../models/GiftIdeaDTO';
 import { HttpGiftsService } from '../services/http-gifts.service';
 import { ImageHelperService } from '../services/image-helper.service';
 
@@ -11,7 +11,7 @@ import { ImageHelperService } from '../services/image-helper.service';
   styleUrls: ['./gifts-list.component.scss']
 })
 export class GiftsListComponent implements OnInit, OnDestroy {
-  giftIdeas: Observable<GiftIdea[]>;
+  giftIdeas: Observable<GiftIdeaDTO[]>;
 
   public errorObject = null;
   constructor(private http: HttpGiftsService) { }

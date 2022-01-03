@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { GiftIdea } from '../models/giftIdea';
+import { GiftIdeaDTO } from '../models/GiftIdeaDTO';
 import { ImageHelperService } from './image-helper.service';
 
 @Injectable({
@@ -16,16 +16,16 @@ private urlAPI = 'https://localhost:44302/api';
 
    }
 
-   getAllGifts(): Observable<GiftIdea[]>{
-    return this.http.get<GiftIdea[]>(this.urlAPI + '/GiftIdeas/GetAll').
+   getAllGifts(): Observable<GiftIdeaDTO[]>{
+    return this.http.get<GiftIdeaDTO[]>(this.urlAPI + '/GiftIdeas/GetAll').
     pipe(
       map(x => x.map((y) => { y.imageContentB64 = this.imageHelper.prepareBase64imagePrefix(y.imageContentB64); return y; })),
       tap(console.log)
       );
    }
 
-   getGift(id: string): Observable<GiftIdea>{
-    return this.http.get<GiftIdea>(this.urlAPI + '/GiftIdeas/Get/' + id).
+   getGift(id: string): Observable<GiftIdeaDTO>{
+    return this.http.get<GiftIdeaDTO>(this.urlAPI + '/GiftIdeas/Get/' + id).
     pipe(tap(console.log));
    }
 

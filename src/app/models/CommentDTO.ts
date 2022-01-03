@@ -1,10 +1,10 @@
-import { GiftIdea } from './giftIdea';
+import { GiftIdeaDTO } from './GiftIdeaDTO';
 
-export interface Comment{
+export interface CommentDTO{
     commentId: number;
     commentContent: string;
     commentAuthor: string;
 
     giftIdeaId: number;
-    giftIdea: GiftIdea;
+    giftIdeaDTO: GiftIdeaDTO;
 }

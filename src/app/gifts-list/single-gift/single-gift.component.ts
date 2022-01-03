@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { GiftIdea } from 'src/app/models/giftIdea';
+import { GiftIdeaDTO } from 'src/app/models/GiftIdeaDTO';
 import { HttpGiftsService } from 'src/app/services/http-gifts.service';
 import { ImageHelperService } from 'src/app/services/image-helper.service';
 
@@ -14,9 +14,9 @@ import { ImageHelperService } from 'src/app/services/image-helper.service';
   styleUrls: ['./single-gift.component.scss']
 })
 export class SingleGiftComponent implements OnInit, OnDestroy {
-  singleGiftObservable: Observable<GiftIdea>;
+  singleGiftObservable: Observable<GiftIdeaDTO>;
   singleGiftSubscription: Subscription;
-  singleGift: GiftIdea = null;
+  singleGift: GiftIdeaDTO = null;
 
   idFromRoute: string;
   isLoading = false;

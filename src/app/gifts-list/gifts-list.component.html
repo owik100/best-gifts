@@ -23,8 +23,8 @@
                   <mat-card-actions>
                     <p>Kategorie:</p>
                     <mat-chip-list aria-label="Fish selection">
-                      <div *ngFor="let category of giftIdea.giftIdeaCategory">
-                        <mat-chip>{{category.category.name}}</mat-chip>
+                      <div *ngFor="let category of giftIdea.giftIdeaCategoryDTO">
+                        <mat-chip>{{category.categoryDTO.name}}</mat-chip>
                       </div>
                     </mat-chip-list>
 
