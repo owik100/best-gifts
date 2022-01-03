@@ -14,13 +14,12 @@ export class GiftsListComponent implements OnInit, OnDestroy {
   giftIdeas: Observable<GiftIdea[]>;
 
   public errorObject = null;
-  constructor(private http: HttpGiftsService, private imageHelper: ImageHelperService) { }
+  constructor(private http: HttpGiftsService) { }
 
   ngOnInit(): void {
     this.giftIdeas = this.http.getAllGifts()
       .pipe(
-        map(x => x.map((y) => { y.imageContentB64 = this.imageHelper.prepareBase64imagePrefix(y.imageContentB64); return y; }))
-        , catchError(err => {
+       catchError(err => {
           this.errorObject = err;
           return throwError(err);
         })

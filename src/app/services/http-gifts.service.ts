@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { GiftIdea } from '../models/giftIdea';
+import { ImageHelperService } from './image-helper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +12,14 @@ export class HttpGiftsService {
 
 private urlAPI = 'https://localhost:44302/api';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private imageHelper: ImageHelperService) {
 
    }
 
    getAllGifts(): Observable<GiftIdea[]>{
     return this.http.get<GiftIdea[]>(this.urlAPI + '/GiftIdeas/GetAll').
     pipe(
+      map(x => x.map((y) => { y.imageContentB64 = this.imageHelper.prepareBase64imagePrefix(y.imageContentB64); return y; })),
       tap(console.log)
       );
    }
