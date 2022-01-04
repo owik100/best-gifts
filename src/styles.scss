@@ -32,3 +32,11 @@ a:hover{
     transform: translate(-50%, -50%);
     z-index: 5;
 }
+
+.mat-chip-list-wrapper{
+    margin-bottom: 5px !important;
+}
+
+#likeBtn > span.mat-button-wrapper, #dislikeeBtn > span.mat-button-wrapper{
+    padding-right: 10px !important;
+}
