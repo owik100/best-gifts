@@ -28,6 +28,7 @@ import { SingleGiftComponent } from './gifts-list/single-gift/single-gift.compon
 import { AnotherErrorComponent } from './another-error/another-error.component';
 import { ErrorButtonsComponent } from './error-buttons/error-buttons.component';
 import { RankingComponent } from './gifts-list/single-gift/ranking/ranking.component';
+import { CommentsComponent } from './gifts-list/single-gift/comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { RankingComponent } from './gifts-list/single-gift/ranking/ranking.compo
     SingleGiftComponent,
     AnotherErrorComponent,
     ErrorButtonsComponent,
-    RankingComponent
+    RankingComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,15 @@
+@import "../../../variables.scss";
+
 h1{
     text-align: center;
+}
+
+#externalLink{
+    margin-bottom: 8px;
+
+    a{
+        color:$base-color;
+        font-size: 18px;
+    }
 }
 

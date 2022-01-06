@@ -10,7 +10,10 @@
       </div>
       <div class="col-md-6"> 
         <h1 class="mat-display-5">Autor: {{singleGift.author}}</h1>
-        <h2>{{singleGift.description}}</h2>
+        <div *ngIf="singleGift.externalUrl" id="externalLink">
+          <a target="_blank" href="{{singleGift.externalUrl}}">{{singleGift.externalUrl}}</a>
+        </div>
+        <h3>{{singleGift.description}}</h3>
         <mat-divider></mat-divider>
         <p>Kategorie:</p>
         <mat-chip-list aria-label="Fish selection">
@@ -22,23 +25,14 @@
 
         <app-ranking [likesCounter] ="singleGift.likesCounter"></app-ranking>
 
-
-
-
-
-
         <button mat-button>SHARE</button>
 
       </div>
     </div>
     </div>
     <mat-divider></mat-divider>
-    <mat-list *ngFor="let comment of singleGift.commentsDTO" role="list">
-      <mat-list-item role="listitem">
-        <i>{{comment.commentAuthor}}:</i>
-        <span style="margin-left: 5px;">{{comment.commentContent}}</span>
-      </mat-list-item>
-    </mat-list>
+
+    <app-comments [comments] ="singleGift.commentsDTO"></app-comments>
    
 </div>
 
