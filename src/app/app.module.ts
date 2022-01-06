@@ -17,6 +17,9 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatListModule} from '@angular/material/list';
 import { LayoutModule } from '@angular/cdk/layout';
+
+import { ShareButtonModule } from 'ngx-sharebuttons/button';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 // Own components
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -60,7 +63,9 @@ import { CommentsComponent } from './gifts-list/single-gift/comments/comments.co
     MatBadgeModule,
     HttpClientModule,
     MatListModule,
-    LayoutModule
+    LayoutModule,
+    ShareButtonModule,
+    ShareIconsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
