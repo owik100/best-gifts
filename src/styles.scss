@@ -40,3 +40,7 @@ a:hover{
 #likeBtn > span.mat-button-wrapper, #dislikeeBtn > span.mat-button-wrapper{
     padding-right: 10px !important;
 }
+
+button[mat-raised-button], a[mat-raised-button]{
+border-radius: 20px;
+}
