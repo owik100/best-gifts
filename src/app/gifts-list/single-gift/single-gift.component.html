@@ -1,11 +1,11 @@
 <div *ngIf="singleGift; else pending">
   <h1 class="mat-display-2">{{singleGift.name}}</h1>
   <div class="container px-4">
-    <div class="row gy-3 gx-5">
+    <div class="row ">
       <div class="col-md-6 col-sm-12"> 
         <img class="img-fluid" *ngIf="singleGift.imageContentB64; else defaultImage" src="{{singleGift.imageContentB64}}"/>
         <ng-template #defaultImage>
-          <img  mat-card-image src="/assets/images/gift.png" alt="Gift image"/>
+          <img class="img-fluid"  mat-card-image src="/assets/images/gift.png" alt="Gift image"/>
         </ng-template>
       </div>
       <div class="col-md-6"> 
@@ -20,15 +20,8 @@
         </mat-chip-list>
         <mat-divider></mat-divider>
 
-    
-          <div id="ratingButtons">
-            <button id="likeBtn" mat-raised-button color="primary">Dobry prezent <fa-icon class="float-end" [icon]="faThumbsUp"></fa-icon></button>
-            <div id ="rating2">
-              <h2>Ranking:</h2>
-              <span class="circle">{{singleGift.likesCounter}}</span>
-            </div>
-            <button id="dislikeeBtn" mat-raised-button color="warn">Kiepski prezent <fa-icon class="float-end" [icon]="faThumbsDown"></fa-icon></button>
-          </div>
+        <app-ranking [likesCounter] ="singleGift.likesCounter"></app-ranking>
+
 
 
 

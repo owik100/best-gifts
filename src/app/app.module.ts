@@ -16,6 +16,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatListModule} from '@angular/material/list';
+import { LayoutModule } from '@angular/cdk/layout';
 // Own components
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -26,6 +27,7 @@ import { StatusServerComponent } from './navbar/status-server/status-server.comp
 import { SingleGiftComponent } from './gifts-list/single-gift/single-gift.component';
 import { AnotherErrorComponent } from './another-error/another-error.component';
 import { ErrorButtonsComponent } from './error-buttons/error-buttons.component';
+import { RankingComponent } from './gifts-list/single-gift/ranking/ranking.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { ErrorButtonsComponent } from './error-buttons/error-buttons.component';
     StatusServerComponent,
     SingleGiftComponent,
     AnotherErrorComponent,
-    ErrorButtonsComponent
+    ErrorButtonsComponent,
+    RankingComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,8 @@ import { ErrorButtonsComponent } from './error-buttons/error-buttons.component';
     MatDividerModule,
     MatBadgeModule,
     HttpClientModule,
-    MatListModule
+    MatListModule,
+    LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

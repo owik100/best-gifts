@@ -7,9 +7,6 @@ import { GiftIdeaDTO } from 'src/app/models/GiftIdeaDTO';
 import { HttpGiftsService } from 'src/app/services/http-gifts.service';
 import { ImageHelperService } from 'src/app/services/image-helper.service';
 
-import { faThumbsUp, faThumbsDown } from '@fortawesome/free-regular-svg-icons';
-
-
 @Component({
   selector: 'app-single-gift',
   templateUrl: './single-gift.component.html',
@@ -25,9 +22,6 @@ export class SingleGiftComponent implements OnInit, OnDestroy {
   is404Error = false;
   isAnotherError = false;
 
-  faThumbsUp = faThumbsUp;
-  faThumbsDown = faThumbsDown;
-
   // tslint:disable-next-line:max-line-length
   constructor(private http: HttpGiftsService, private route: ActivatedRoute, private router: Router, private imageHelper: ImageHelperService)
   { }
@@ -35,6 +29,9 @@ export class SingleGiftComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.paramMap.subscribe( paramMap => {
       this.idFromRoute = paramMap.get('id');
+
+
+
   });
 
     this.singleGiftObservable = this.http.getGift(this.idFromRoute);
@@ -60,6 +57,8 @@ export class SingleGiftComponent implements OnInit, OnDestroy {
           }
         },
         () => console.log('KONIEC', this.singleGift, this.singleGiftSubscription));
+
+
   }
 
   ngOnDestroy(): void {
