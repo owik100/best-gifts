@@ -2,29 +2,27 @@
           <div class="container px-4">
             <div class="row gy-3 gx-5">
               <ng-container *ngFor="let giftIdea of ideas">
-                <mat-card class="card-content col col-lg-3 col-md-4 col-sm-8 col-12">
-                  <mat-card-header>
-                    <div mat-card-avatar class="example-header-image"></div>
-                    <mat-card-title>
-                        <a [routerLink]="['/gift', giftIdea.giftIdeaId]">{{giftIdea.name}}</a>
-                    </mat-card-title>
-                    <mat-card-subtitle>Autor: {{giftIdea.author}}</mat-card-subtitle>
-                  </mat-card-header>
-                  <img *ngIf="giftIdea.imageContentB64; else defaultImage" src="{{giftIdea.imageContentB64}}"/>
-                  <ng-template #defaultImage>
-                    <img class="img-fluid" mat-card-image src="/assets/images/gift.png" alt="Gift image"/>
-                  </ng-template>
-                  <mat-card-actions>
-                    <p>Kategorie:</p>
-                    <mat-chip-list aria-label="Fish selection">
-                      <div *ngFor="let category of giftIdea.giftIdeaCategoryDTO">
-                        <mat-chip>{{category.categoryDTO.name}}</mat-chip>
-                      </div>
-                    </mat-chip-list>
+                <div class="card col col-lg-3 col-md-4 col-sm-8 col-12">
 
-                  </mat-card-actions>
-                  <span matBadge={{giftIdea.likesCounter}} matBadgeSize="large" matBadgeColor="primary" matBadgeOverlap="false">Polubienia</span>
-                </mat-card>
+                    <div>
+                        <a class="card-title" [routerLink]="['/gift', giftIdea.giftIdeaId]"><h2 class="text-center">{{giftIdea.name}}</h2>
+                          <img class="img-fluid" *ngIf="giftIdea.imageContentB64; else defaultImage" src="{{giftIdea.imageContentB64}}"/>
+                          <ng-template #defaultImage>
+                            <img class="img-fluid" mat-card-image src="/assets/images/gift.png" alt="Gift image"/>
+                          </ng-template>
+                        </a>
+                    </div>
+
+                    <div class="mt-2">
+                      <mat-divider></mat-divider>
+                    </div>
+
+                  <div class ="rating">
+                    <h3>Polubienia:</h3>
+                    <span class="circle" [ngClass]="giftIdea.likesCounter > 0 ? 'rankingPositive' : 'rankingNegative'">{{giftIdea.likesCounter}}</span>
+                  </div>
+
+                </div>
 
 
               </ng-container>

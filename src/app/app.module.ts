@@ -11,10 +11,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatDividerModule} from '@angular/material/divider';
-import {MatBadgeModule} from '@angular/material/badge';
 import {MatListModule} from '@angular/material/list';
 import { LayoutModule } from '@angular/cdk/layout';
 
@@ -59,10 +57,8 @@ import { ShareComponent } from './gifts-list/single-gift/share/share.component';
     MatButtonModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
-    MatCardModule,
     MatChipsModule,
     MatDividerModule,
-    MatBadgeModule,
     HttpClientModule,
     MatListModule,
     LayoutModule,

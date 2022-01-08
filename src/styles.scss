@@ -44,3 +44,13 @@ a:hover{
 button[mat-raised-button], a[mat-raised-button]{
 border-radius: 20px;
 }
+
+.rankingPositive{
+    background: #3f51b5 !important;;
+    color: white !important;;
+}
+
+.rankingNegative{
+    background: #f44336 !important;;
+    color: white !important;;
+}

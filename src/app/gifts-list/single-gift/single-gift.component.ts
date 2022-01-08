@@ -41,7 +41,7 @@ export class SingleGiftComponent implements OnInit, OnDestroy {
     subscribe(
         data => {
           this.singleGift = data;
-          this.singleGift.imageContentB64 =  this.imageHelper.prepareBase64imagePrefix(data.imageContentB64);
+          this.singleGift.imageContentB64 = this.imageHelper.prepareBase64imagePrefix(data.imageContentB64);
           this.isLoading = false;
         },
         err => {
