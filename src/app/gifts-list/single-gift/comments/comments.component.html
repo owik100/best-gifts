@@ -1,6 +1,10 @@
 <mat-list *ngFor="let comment of comments" role="list">
     <mat-list-item role="listitem">
-      <i>{{comment.commentAuthor}}:</i>
-      <span style="margin-left: 5px;">{{comment.commentContent}}</span>
+      <div>
+        <h5>{{comment.creationTime | date:'dd MM yyyy HH:mm'}}</h5>
+        <i>{{comment.commentAuthor}}:</i>
+        <span style="margin-left: 5px;">{{comment.commentContent}}</span>
+      </div>
+
     </mat-list-item>
   </mat-list>

@@ -9,6 +9,7 @@ export interface GiftIdeaDTO{
     likesCounter: string;
     imageContentB64: string;
     externalUrl: string;
+    CreationTime: Date;
 
     commentsDTO: CommentDTO[];
     giftIdeaCategoryDTO: GiftIdeaCategoryDTO[];
