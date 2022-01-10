@@ -19,7 +19,7 @@
 
                   <div class ="rating">
                     <h3>Polubienia:</h3>
-                    <span class="circle" [ngClass]="giftIdea.likesCounter > 0 ? 'rankingPositive' : 'rankingNegative'">{{giftIdea.likesCounter}}</span>
+                    <span class="circle" [ngClass]="giftIdea.likesCounter > 0 ? 'rankingPositive' : giftIdea.likesCounter < 0 ? 'rankingNegative' : '' ">{{giftIdea.likesCounter}}</span>
                   </div>
 
                 </div>

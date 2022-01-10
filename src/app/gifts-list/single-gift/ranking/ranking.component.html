@@ -1,14 +1,14 @@
 <div id="ratingButtons">
     <div>
-        <button id="likeBtn" mat-raised-button color="primary"><fa-icon class="float-end" [icon]="faThumbsUp"></fa-icon></button>
+        <button [disabled]="clickedLike" id="likeBtn" (click)="Vote(true);" mat-raised-button color="primary"><fa-icon class="float-end" [icon]="faThumbsUp"></fa-icon></button>
         <div id="likeBtnTxt" class="BtnTxt">Dobry prezent</div>
     </div>
     <div id ="rating">
       <h2>Polubienia:</h2>
-      <span class="circle" [ngClass]="likesCounter > 0 ? 'rankingPositive' : 'rankingNegative'">{{likesCounter}}</span>
+      <span class="circle" [ngClass]="likesCounter > 0 ? 'rankingPositive' : likesCounter < 0 ? 'rankingNegative' : '' ">{{likesCounter}}</span>
     </div>
     <div>
-        <button id="dislikeeBtn" mat-raised-button color="warn"><fa-icon class="float-end" [icon]="faThumbsDown"></fa-icon></button>
+        <button id="dislikeeBtn" [disabled]="clickedDislike" (click)="Vote(false);" mat-raised-button color="warn"><fa-icon class="float-end" [icon]="faThumbsDown"></fa-icon></button>
         <div id="dislikeBtnTxt" class="BtnTxt">Kiepski prezent</div>
     </div>
   </div>

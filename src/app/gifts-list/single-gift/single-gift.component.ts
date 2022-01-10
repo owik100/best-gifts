@@ -1,11 +1,12 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { GiftIdeaDTO } from 'src/app/models/GiftIdeaDTO';
 import { HttpGiftsService } from 'src/app/services/http-gifts.service';
 import { ImageHelperService } from 'src/app/services/image-helper.service';
+import { RankingComponent } from './ranking/ranking.component';
 
 @Component({
   selector: 'app-single-gift',
@@ -22,6 +23,8 @@ export class SingleGiftComponent implements OnInit, OnDestroy {
   is404Error = false;
   isAnotherError = false;
 
+  @ViewChild(RankingComponent) childRanking: RankingComponent;
+
   // tslint:disable-next-line:max-line-length
   constructor(private http: HttpGiftsService, private route: ActivatedRoute, private router: Router, private imageHelper: ImageHelperService)
   { }
@@ -29,9 +32,6 @@ export class SingleGiftComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.paramMap.subscribe( paramMap => {
       this.idFromRoute = paramMap.get('id');
-
-
-
   });
 
     this.singleGiftObservable = this.http.getGift(this.idFromRoute);
@@ -61,9 +61,19 @@ export class SingleGiftComponent implements OnInit, OnDestroy {
 
   }
 
-  ngOnDestroy(): void {
-    this.singleGiftSubscription .unsubscribe();
+  ChangeGiftIdeaRanking(VoteIncrease: boolean): void{
+    this.http.ChangeGiftIdeaRanking(this.idFromRoute, VoteIncrease).subscribe(
+      data => {
+        this.childRanking.RefreshCouner(VoteIncrease);
+      },
+      err => {
+        (console.log('ERROR', err));
+      }
+    );
   }
 
+  ngOnDestroy(): void {
+    this.singleGiftSubscription.unsubscribe();
+  }
 
 }

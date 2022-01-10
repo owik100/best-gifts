@@ -16,6 +16,7 @@ private urlAPI = 'https://localhost:44302/api';
 
    }
 
+   // GiftIdeasController
    getAllGifts(): Observable<GiftIdeaDTO[]>{
     return this.http.get<GiftIdeaDTO[]>(this.urlAPI + '/GiftIdeas/GetAll').
     pipe(
@@ -29,8 +30,17 @@ private urlAPI = 'https://localhost:44302/api';
     pipe(tap(console.log));
    }
 
+
+   // StatusController
    checkServerStatus(): Observable<any>{
-    return this.http.get<any>(this.urlAPI + '/GiftIdeas/Online', {observe: 'response'}).
+    return this.http.get<any>(this.urlAPI + '/Status/Online', {observe: 'response'}).
     pipe(tap(console.log));
    }
+
+   // RankingController
+   ChangeGiftIdeaRanking(id: string, increase: boolean): Observable<any>{
+    return this.http.patch<GiftIdeaDTO>(this.urlAPI + '/Ranking/ChangeGiftIdeaRanking/' + id + '/' + increase, null).
+    pipe(tap(console.log));
+   }
+
 }
