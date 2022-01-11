@@ -17,6 +17,8 @@ faThumbsDown = faThumbsDown;
 clickedLike;
 clickedDislike;
 
+animCircle = false;
+
 
 @Output() voteEmitt = new EventEmitter<boolean>();
 @Output() checkCookie = new EventEmitter();
@@ -26,7 +28,8 @@ Vote(increase: boolean): void{
 }
 
 RefreshCouner(increase: boolean): void {
- if (increase){
+this.animCircle = true;
+if (increase){
    this.clickedLike = true;
    this.clickedDislike = false;
    this.likesCounter += 1;
@@ -36,6 +39,10 @@ RefreshCouner(increase: boolean): void {
   this.clickedDislike = true;
   this.likesCounter -= 1;
  }
+setTimeout(() => {
+  this.animCircle = false;
+ }, 1000);
+
 }
 
   constructor(private cookieService: CookieService) { }

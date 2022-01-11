@@ -37,6 +37,7 @@ fa-icon{
         margin-right: 5px;
         text-align: center;
         width: 60px;
+
 }
 
 #likeBtnTxt{
@@ -52,4 +53,21 @@ color: $base-warn;
 .BtnTxt{
     font-size: 14px;
     font-weight: 500;
+}
+
+.animRankingCircle{
+    animation: pulse-ranking-circle 1s 1;
+}
+
+
+@keyframes pulse-ranking-circle{
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.2);
+    }
+    100%{
+        transform: scale(1);
+    }
 }

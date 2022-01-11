@@ -5,7 +5,7 @@
     </div>
     <div id ="rating">
       <h2>Polubienia:</h2>
-      <span class="circle" [ngClass]="likesCounter > 0 ? 'rankingPositive' : likesCounter < 0 ? 'rankingNegative' : '' ">{{likesCounter}}</span>
+      <span class="circle" [class.animRankingCircle]="animCircle" [ngClass]="likesCounter > 0 ? 'rankingPositive' : likesCounter < 0 ? 'rankingNegative' : '' ">{{likesCounter}}</span>
     </div>
     <div>
         <button id="dislikeeBtn" [disabled]="clickedDislike" (click)="Vote(false);" mat-raised-button color="warn"><fa-icon class="float-end" [icon]="faThumbsDown"></fa-icon></button>
