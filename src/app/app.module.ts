@@ -16,8 +16,11 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import { LayoutModule } from '@angular/cdk/layout';
 
+// Others
 import { ShareButtonModule } from 'ngx-sharebuttons/button';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
+import { CookieService } from 'ngx-cookie-service';
+
 // Own components
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -63,9 +66,9 @@ import { ShareComponent } from './gifts-list/single-gift/share/share.component';
     MatListModule,
     LayoutModule,
     ShareButtonModule,
-    ShareIconsModule
+    ShareIconsModule,
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

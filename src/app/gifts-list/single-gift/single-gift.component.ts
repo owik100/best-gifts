@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { GiftIdeaDTO } from 'src/app/models/GiftIdeaDTO';
@@ -13,7 +14,7 @@ import { RankingComponent } from './ranking/ranking.component';
   templateUrl: './single-gift.component.html',
   styleUrls: ['./single-gift.component.scss']
 })
-export class SingleGiftComponent implements OnInit, OnDestroy {
+export class SingleGiftComponent implements OnInit, OnDestroy, AfterViewInit {
   singleGiftObservable: Observable<GiftIdeaDTO>;
   singleGiftSubscription: Subscription;
   singleGift: GiftIdeaDTO = null;
@@ -23,10 +24,11 @@ export class SingleGiftComponent implements OnInit, OnDestroy {
   is404Error = false;
   isAnotherError = false;
 
-  @ViewChild(RankingComponent) childRanking: RankingComponent;
+  @ViewChildren(RankingComponent) childRankingQueryList: QueryList<RankingComponent>;
+  private childRanking: RankingComponent;
 
   // tslint:disable-next-line:max-line-length
-  constructor(private http: HttpGiftsService, private route: ActivatedRoute, private router: Router, private imageHelper: ImageHelperService)
+  constructor(private http: HttpGiftsService, private route: ActivatedRoute, private router: Router, private imageHelper: ImageHelperService, private cookieService: CookieService)
   { }
 
   ngOnInit(): void {
@@ -58,18 +60,49 @@ export class SingleGiftComponent implements OnInit, OnDestroy {
         },
         () => console.log('KONIEC', this.singleGift, this.singleGiftSubscription));
 
+  }
 
+  CheckCookieVote(): void{
+    const cookieExists: boolean = this.cookieService.check(`Vote${this.idFromRoute}`);
+    if (cookieExists){
+      const value: string = this.cookieService.get(`Vote${this.idFromRoute}`);
+      if (value === 'true'){
+        this.childRanking.clickedLike = true;
+      }
+      else if (value === 'false'){
+        this.childRanking.clickedDislike = true;
+      }
+
+    }
   }
 
   ChangeGiftIdeaRanking(VoteIncrease: boolean): void{
     this.http.ChangeGiftIdeaRanking(this.idFromRoute, VoteIncrease).subscribe(
       data => {
         this.childRanking.RefreshCouner(VoteIncrease);
+        const cookieExists: boolean = this.cookieService.check(`Vote${this.idFromRoute}`);
+        if (cookieExists){
+          this.cookieService.delete(`Vote${this.idFromRoute}`, '/gift');
+        }
+
+        this.cookieService.set(`Vote${this.idFromRoute}`, `${VoteIncrease}`, {path: '/gift'} );
+
       },
       err => {
         (console.log('ERROR', err));
       }
     );
+  }
+
+  ngAfterViewInit(): void{
+    this.childRankingQueryList.changes.subscribe((result: QueryList <RankingComponent>) =>
+    {
+        this.childRanking = result.first;
+        setTimeout(() => {
+          this.CheckCookieVote();
+        }, 0);
+    });
+
   }
 
   ngOnDestroy(): void {

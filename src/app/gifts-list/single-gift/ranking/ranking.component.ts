@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-regular-svg-icons';
 import { EventEmitter } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-ranking',
@@ -13,11 +14,12 @@ export class RankingComponent implements OnInit {
 faThumbsUp = faThumbsUp;
 faThumbsDown = faThumbsDown;
 
-clickedLike = false;
-clickedDislike = false;
+clickedLike;
+clickedDislike;
 
 
 @Output() voteEmitt = new EventEmitter<boolean>();
+@Output() checkCookie = new EventEmitter();
 
 Vote(increase: boolean): void{
   this.voteEmitt.emit(increase);
@@ -36,10 +38,10 @@ RefreshCouner(increase: boolean): void {
  }
 }
 
-  constructor() { }
+  constructor(private cookieService: CookieService) { }
 
   ngOnInit(): void {
-
+    this.checkCookie.emit();
   }
 
 }
