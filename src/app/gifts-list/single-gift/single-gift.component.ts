@@ -82,10 +82,10 @@ export class SingleGiftComponent implements OnInit, OnDestroy, AfterViewInit {
         this.childRanking.RefreshCouner(VoteIncrease);
         const cookieExists: boolean = this.cookieService.check(`Vote${this.idFromRoute}`);
         if (cookieExists){
-          this.cookieService.delete(`Vote${this.idFromRoute}`, '/gift');
+          this.cookieService.delete(`Vote${this.idFromRoute}`, '/');
         }
 
-        this.cookieService.set(`Vote${this.idFromRoute}`, `${VoteIncrease}`, {path: '/gift'} );
+        this.cookieService.set(`Vote${this.idFromRoute}`, `${VoteIncrease}`, {path: '/'} );
 
       },
       err => {
