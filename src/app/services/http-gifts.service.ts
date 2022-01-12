@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { CommentDTO } from '../models/CommentDTO';
 import { GiftIdeaDTO } from '../models/GiftIdeaDTO';
 import { ImageHelperService } from './image-helper.service';
 
@@ -40,6 +41,12 @@ private urlAPI = 'https://localhost:44302/api';
    // RankingController
    ChangeGiftIdeaRanking(id: string, increase: boolean): Observable<any>{
     return this.http.patch<GiftIdeaDTO>(this.urlAPI + '/Ranking/ChangeGiftIdeaRanking/' + id + '/' + increase, null).
+    pipe(tap(console.log));
+   }
+
+   // CommentController
+   CreateComment(comment: CommentDTO): Observable<CommentDTO> {
+    return this.http.post<CommentDTO>(this.urlAPI + '/Comment/Create' , comment).
     pipe(tap(console.log));
    }
 

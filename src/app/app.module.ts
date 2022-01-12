@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 // Angular material
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
@@ -15,6 +16,8 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import { LayoutModule } from '@angular/cdk/layout';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule } from '@angular/material/input';
 
 // Others
 import { ShareButtonModule } from 'ngx-sharebuttons/button';
@@ -53,6 +56,8 @@ import { ShareComponent } from './gifts-list/single-gift/share/share.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    MatInputModule,
     AppRoutingModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
@@ -67,6 +72,7 @@ import { ShareComponent } from './gifts-list/single-gift/share/share.component';
     LayoutModule,
     ShareButtonModule,
     ShareIconsModule,
+    MatFormFieldModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

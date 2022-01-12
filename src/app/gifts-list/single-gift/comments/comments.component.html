@@ -8,3 +8,28 @@
 
     </mat-list-item>
   </mat-list>
+
+  <div class="container">
+    <form #commentForm="ngForm" (ngSubmit)="sendComment()">
+      <mat-form-field appearance="legacy">
+        <mat-label>Twój nick</mat-label>
+        <input matInput
+        type="text" 
+        [(ngModel)] ="commentToPost.commentAuthor"
+        name="commentAuthor"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy">
+        <mat-label>Komentarz</mat-label>
+        <textarea matInput
+        type="text" 
+        [(ngModel)] ="commentToPost.commentContent"
+        name="commentContent"
+        > 
+      </textarea>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">Wyślij</button>
+    </form>
+  </div>
