@@ -1,3 +1,44 @@
-h5{
-    margin-bottom: 2px;
+h5 {
+  margin-bottom: 2px;
+}
+
+.containerForm {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+form {
+  width: 90%;
+}
+
+#nickInput {
+  width: 25%;
+}
+
+#contentInput {
+  width: 55%;
+}
+
+#submitBtn {
+  width: 15%;
+}
+
+mat-form-field {
+  margin-right: 10px;
+}
+
+@media only screen and (max-width: 767px) {
+  #nickInput {
+    width: 100%;
+  }
+
+  #contentInput {
+    width: 100%;
+  }
+
+  #submitBtn {
+    width: 100%;
+  }
 }
