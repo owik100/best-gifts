@@ -9,11 +9,11 @@ import { HttpGiftsService } from 'src/app/services/http-gifts.service';
   styleUrls: ['./comments.component.scss']
 })
 export class CommentsComponent implements OnInit {
-@Input() comments: CommentDTO;
+@Input() comments: CommentDTO[];
 @Input() giftIdeaId: number;
 
 commentToPost: Partial<CommentDTO> = {};
-
+  isCollapsed = false;
   constructor(private http: HttpGiftsService) { }
 
   ngOnInit(): void {

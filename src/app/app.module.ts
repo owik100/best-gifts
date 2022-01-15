@@ -37,6 +37,7 @@ import { ErrorButtonsComponent } from './error-buttons/error-buttons.component';
 import { RankingComponent } from './gifts-list/single-gift/ranking/ranking.component';
 import { CommentsComponent } from './gifts-list/single-gift/comments/comments.component';
 import { ShareComponent } from './gifts-list/single-gift/share/share.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { ShareComponent } from './gifts-list/single-gift/share/share.component';
     LayoutModule,
     ShareButtonModule,
     ShareIconsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    NgbModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

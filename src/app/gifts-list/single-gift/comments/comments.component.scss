@@ -2,6 +2,10 @@ h5 {
   margin-bottom: 2px;
 }
 
+mat-list :not.last-child{
+  margin-bottom: 15px;
+}
+
 .containerForm {
   display: flex;
   justify-content: center;

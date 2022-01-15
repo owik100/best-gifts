@@ -1,3 +1,4 @@
+<h3 style="text-align: center;">Dodaj komentarz</h3>
 <div class="containerForm">
   <form #commentForm="ngForm" (ngSubmit)="sendComment()">
     <mat-form-field id="nickInput" appearance="legacy">
@@ -22,13 +23,21 @@
   </form>
 </div>
 
-<mat-list *ngFor="let comment of comments" role="list">
+<ng-template #noComments>
+  <h3 style="text-align: center;">Nie ma jeszcze żadnych komentarzy. Dodaj pierwszy!</h3>
+</ng-template>
+
+<ng-container *ngIf="comments.length > 0; else noComments">
+  <mat-list *ngFor="let comment of comments;"  [ngClass]="{'last-child': last}" role="list">
     <mat-list-item role="listitem">
       <div>
         <h5>{{comment.creationTime | date:'dd MM yyyy HH:mm'}}</h5>
         <i>{{comment.commentAuthor}}:</i>
         <span style="margin-left: 5px;">{{comment.commentContent}}</span>
+        <mat-divider></mat-divider>
       </div>
 
     </mat-list-item>
   </mat-list>
+</ng-container>
+
