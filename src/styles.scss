@@ -1,6 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
 @import '~ngx-sharebuttons/themes/circles/circles-dark-theme';
-/* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 
 html, body { height: 100%; }
@@ -49,15 +47,32 @@ border-radius: 20px;
 }
 
 .rankingPositive{
-    background: #3f51b5 !important;;
-    color: white !important;;
+    background: #3f51b5 !important;
+    color: white !important;
 }
 
 .rankingNegative{
-    background: #f44336 !important;;
-    color: white !important;;
+    background: #f44336 !important;
+    color: white !important;
 }
 
 textarea {
     resize: none !important;
   }
+
+.ok-snackbar {
+  color: white;
+}
+
+.err-snackbar {
+  color: #f44336;
+}
+
+
+.mat-snack-bar-container {
+    text-align: center;
+}
+
+.mat-simple-snackbar {
+    display: inline-block !important;
+}

@@ -1,9 +1,10 @@
 <h3 style="text-align: center;">Dodaj komentarz</h3>
 <div class="containerForm">
-  <form #commentForm="ngForm" (ngSubmit)="sendComment()">
+  <form #commentForm="ngForm" (ngSubmit)="sendComment(); commentForm.resetForm();">
     <mat-form-field id="nickInput" appearance="legacy">
       <mat-label>Twój nick</mat-label>
       <input matInput
+      required
       type="text" 
       [(ngModel)] ="commentToPost.commentAuthor"
       name="commentAuthor"
@@ -12,14 +13,15 @@
 
     <mat-form-field id="contentInput" appearance="legacy">
       <mat-label>Komentarz</mat-label>
-      <textarea  rows="5" matInput
+      <textarea  rows="3" matInput
+      required
       type="text" 
       [(ngModel)] ="commentToPost.commentContent"
       name="commentContent"
       > 
     </textarea>
     </mat-form-field>
-    <button id="submitBtn" mat-raised-button color="primary" type="submit">Wyślij</button>
+    <button id="submitBtn" [disabled]="commentForm.invalid" mat-raised-button color="primary" type="submit">Wyślij</button>
   </form>
 </div>
 

@@ -18,6 +18,7 @@ import {MatListModule} from '@angular/material/list';
 import { LayoutModule } from '@angular/cdk/layout';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule } from '@angular/material/input';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 // Others
 import { ShareButtonModule } from 'ngx-sharebuttons/button';
@@ -74,7 +75,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ShareButtonModule,
     ShareIconsModule,
     MatFormFieldModule,
-    NgbModule
+    NgbModule,
+    MatSnackBarModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
