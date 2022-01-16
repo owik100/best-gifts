@@ -36,7 +36,7 @@
     </div>
     <mat-divider></mat-divider>
 
-    <app-comments [giftIdeaId] = "singleGift.giftIdeaId" [comments] ="singleGift.commentsDTO"></app-comments>
+    <app-comments (refreshCommments)="onRefreshComments($event)" [giftIdeaId] = "singleGift.giftIdeaId" [comments] ="singleGift.commentsDTO"></app-comments>
    
 </div>
 

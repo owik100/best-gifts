@@ -50,8 +50,8 @@ private urlAPI = 'https://localhost:44302/api';
     pipe(tap(console.log));
    }
 
-   GetComment(id: string): Observable<CommentDTO>{
-    return this.http.get<CommentDTO>(this.urlAPI + '/Comment/Get/' + id).
+   GetComment(id: string): Observable<CommentDTO[]>{
+    return this.http.get<CommentDTO[]>(this.urlAPI + '/Comment/Get/' + id).
     pipe(tap(console.log));
   }
 

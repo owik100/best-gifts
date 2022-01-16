@@ -30,16 +30,25 @@
 </ng-template>
 
 <ng-container *ngIf="comments.length > 0; else noComments">
-  <mat-list *ngFor="let comment of comments;"  [ngClass]="{'last-child': last}" role="list">
-    <mat-list-item role="listitem">
-      <div>
-        <h5>{{comment.creationTime | date:'dd MM yyyy HH:mm'}}</h5>
-        <i>{{comment.commentAuthor}}:</i>
-        <span style="margin-left: 5px;">{{comment.commentContent}}</span>
-        <mat-divider></mat-divider>
-      </div>
+  <div class="matListContainer">
+    <mat-list *ngFor="let comment of comments;"  [ngClass]="{'last-child': last}" role="list">
+      <mat-list-item role="listitem">
+        <div>
+          <h5>{{comment.creationTime | date:'dd MM yyyy HH:mm'}}</h5>
+          <i>{{comment.commentAuthor}}:</i>
+          <span style="margin-left: 5px;">{{comment.commentContent}}</span>
+          <mat-divider></mat-divider>
+        </div>
+      </mat-list-item>
+    </mat-list>
 
-    </mat-list-item>
-  </mat-list>
+    
+<mat-paginator [length]="15"
+[pageSize]="5"
+aria-label="Select page">
+</mat-paginator>
+
+  </div>
+
 </ng-container>
 

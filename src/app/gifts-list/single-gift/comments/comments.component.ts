@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { CommentDTO } from 'src/app/models/CommentDTO';
 import { NgForm } from '@angular/forms';
 import { HttpGiftsService } from 'src/app/services/http-gifts.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { config } from 'process';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-comments',
@@ -13,6 +14,8 @@ import { config } from 'process';
 export class CommentsComponent implements OnInit {
 @Input() comments: CommentDTO[];
 @Input() giftIdeaId: number;
+
+@Output() refreshCommments = new EventEmitter<void>();
 
 commentToPost: Partial<CommentDTO> = {};
   isCollapsed = false;
@@ -32,6 +35,7 @@ commentToPost: Partial<CommentDTO> = {};
         matConfig.panelClass = ['ok-snackbar'];
         this.snackBar.open('Komentarz dodany!', '', matConfig);
 
+        this.refreshCommments.emit();
       },
       err => {
         (console.log('ERROR', err));
@@ -42,7 +46,7 @@ commentToPost: Partial<CommentDTO> = {};
         this.snackBar.open('Błąd Komentrz nie został dodany!', '', matConfig);
       },
     );
-    this.commentToPost = {};
+    this.commentToPost = {giftIdeaId : this.giftIdeaId} as Partial<CommentDTO>;
   }
 
 }
