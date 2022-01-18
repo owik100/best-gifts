@@ -1,5 +1,6 @@
 import { CommentDTO } from './CommentDTO';
 import { GiftIdeaCategoryDTO } from './GiftIdeaCategoryDTO';
+import { PagedListDTO } from './PagedListDTO';
 
 export interface GiftIdeaDTO{
     giftIdeaId: number;
@@ -11,6 +12,6 @@ export interface GiftIdeaDTO{
     externalUrl: string;
     CreationTime: Date;
 
-    commentsDTO: CommentDTO[];
+    commentsDTO: PagedListDTO<CommentDTO>;
     giftIdeaCategoryDTO: GiftIdeaCategoryDTO[];
 }

@@ -94,8 +94,8 @@ export class SingleGiftComponent implements OnInit, OnDestroy, AfterViewInit {
     );
   }
 
-  onRefreshComments(): void{
-    this.http.GetComment(this.idFromRoute).subscribe(
+  onRefreshComments(pageIndex: string): void{
+    this.http.GetComment(this.idFromRoute, pageIndex).subscribe(
       data => {
         this.singleGift.commentsDTO = data;
       },

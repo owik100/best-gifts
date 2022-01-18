@@ -19,6 +19,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule } from '@angular/material/input';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 
 // Others
 import { ShareButtonModule } from 'ngx-sharebuttons/button';
@@ -39,6 +40,7 @@ import { RankingComponent } from './gifts-list/single-gift/ranking/ranking.compo
 import { CommentsComponent } from './gifts-list/single-gift/comments/comments.component';
 import { ShareComponent } from './gifts-list/single-gift/share/share.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PLPaginatorIntl } from './CustomPaginatorIntl';
 
 @NgModule({
   declarations: [
@@ -76,9 +78,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ShareIconsModule,
     MatFormFieldModule,
     NgbModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatPaginatorModule
   ],
-  providers: [CookieService],
+  providers: [CookieService,
+    {provide: MatPaginatorIntl, useClass: PLPaginatorIntl}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

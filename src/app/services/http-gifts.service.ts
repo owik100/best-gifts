@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { CommentDTO } from '../models/CommentDTO';
 import { GiftIdeaDTO } from '../models/GiftIdeaDTO';
+import { PagedListDTO } from '../models/PagedListDTO';
 import { ImageHelperService } from './image-helper.service';
 
 @Injectable({
@@ -18,10 +19,11 @@ private urlAPI = 'https://localhost:44302/api';
    }
 
    // GiftIdeasController
-   getAllGifts(): Observable<GiftIdeaDTO[]>{
-    return this.http.get<GiftIdeaDTO[]>(this.urlAPI + '/GiftIdeas/GetAll').
+   getAllGifts(): Observable<PagedListDTO<GiftIdeaDTO>>{
+    return this.http.get<PagedListDTO<GiftIdeaDTO>>(this.urlAPI + '/GiftIdeas/GetAll').
     pipe(
-      map(x => x.map((y) => { y.imageContentB64 = this.imageHelper.prepareBase64imagePrefix(y.imageContentB64); return y; })),
+      map(x => x.items.map
+        ((y) => {  y.imageContentB64 = this.imageHelper.prepareBase64imagePrefix(y.imageContentB64); return y; })),
       tap(console.log)
       );
    }
@@ -50,8 +52,10 @@ private urlAPI = 'https://localhost:44302/api';
     pipe(tap(console.log));
    }
 
-   GetComment(id: string): Observable<CommentDTO[]>{
-    return this.http.get<CommentDTO[]>(this.urlAPI + '/Comment/Get/' + id).
+   GetComment(id: string, pageIndex: string): Observable<PagedListDTO<CommentDTO>>{
+    let params = new HttpParams();
+    params = params.append('pageNumber', (pageIndex as unknown as number + 1).toString());
+    return this.http.get<PagedListDTO<CommentDTO>>(this.urlAPI + '/Comment/Get/' + id, {params}).
     pipe(tap(console.log));
   }
 

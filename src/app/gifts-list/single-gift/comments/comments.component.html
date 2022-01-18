@@ -29,9 +29,9 @@
   <h3 style="text-align: center;">Nie ma jeszcze żadnych komentarzy. Dodaj pierwszy!</h3>
 </ng-template>
 
-<ng-container *ngIf="comments.length > 0; else noComments">
+<ng-container *ngIf="comments.items.length > 0; else noComments">
   <div class="matListContainer">
-    <mat-list *ngFor="let comment of comments;"  [ngClass]="{'last-child': last}" role="list">
+    <mat-list *ngFor="let comment of comments.items;"  [ngClass]="{'last-child': last}" role="list">
       <mat-list-item role="listitem">
         <div>
           <h5>{{comment.creationTime | date:'dd MM yyyy HH:mm'}}</h5>
@@ -43,8 +43,11 @@
     </mat-list>
 
     
-<mat-paginator [length]="15"
-[pageSize]="5"
+<mat-paginator 
+[length]="comments.totalItems"
+[pageSize]="comments.pageSize"
+[pageIndex]="comments.currentPage - 1"
+(page)="pageEvent = getComments($event)"
 aria-label="Select page">
 </mat-paginator>
 

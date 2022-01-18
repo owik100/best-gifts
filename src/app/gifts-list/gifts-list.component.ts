@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, of, Subscriber, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { GiftIdeaDTO } from '../models/GiftIdeaDTO';
+import { PagedListDTO } from '../models/PagedListDTO';
 import { HttpGiftsService } from '../services/http-gifts.service';
 import { ImageHelperService } from '../services/image-helper.service';
 
@@ -11,7 +12,7 @@ import { ImageHelperService } from '../services/image-helper.service';
   styleUrls: ['./gifts-list.component.scss']
 })
 export class GiftsListComponent implements OnInit, OnDestroy {
-  giftIdeas: Observable<GiftIdeaDTO[]>;
+  giftIdeas: Observable<PagedListDTO<GiftIdeaDTO>>;
 
   public errorObject = null;
   constructor(private http: HttpGiftsService) { }

@@ -1,10 +1,12 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, Input, OnInit, Output } from '@angular/core';
 import { CommentDTO } from 'src/app/models/CommentDTO';
 import { NgForm } from '@angular/forms';
 import { HttpGiftsService } from 'src/app/services/http-gifts.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { config } from 'process';
 import { EventEmitter } from '@angular/core';
+import { PagedListDTO } from 'src/app/models/PagedListDTO';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-comments',
@@ -12,10 +14,12 @@ import { EventEmitter } from '@angular/core';
   styleUrls: ['./comments.component.scss']
 })
 export class CommentsComponent implements OnInit {
-@Input() comments: CommentDTO[];
+@Input() comments: PagedListDTO<CommentDTO>;
 @Input() giftIdeaId: number;
 
-@Output() refreshCommments = new EventEmitter<void>();
+pageEvent: PageEvent;
+
+@Output() refreshCommments = new EventEmitter<number>();
 
 commentToPost: Partial<CommentDTO> = {};
   isCollapsed = false;
@@ -24,6 +28,10 @@ commentToPost: Partial<CommentDTO> = {};
   ngOnInit(): void {
     this.commentToPost = {giftIdeaId : this.giftIdeaId} as Partial<CommentDTO>;
 
+  }
+
+  public getComments(event?: PageEvent): void{
+    this.refreshCommments.emit(event.pageIndex);
   }
 
   sendComment(): void{
@@ -35,7 +43,7 @@ commentToPost: Partial<CommentDTO> = {};
         matConfig.panelClass = ['ok-snackbar'];
         this.snackBar.open('Komentarz dodany!', '', matConfig);
 
-        this.refreshCommments.emit();
+        this.refreshCommments.emit(0);
       },
       err => {
         (console.log('ERROR', err));
