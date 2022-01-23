@@ -12,51 +12,58 @@ import { ImageHelperService } from './image-helper.service';
 })
 export class HttpGiftsService {
 
-private urlAPI = 'https://localhost:44302/api';
+  private urlAPI = 'https://localhost:44302/api';
 
   constructor(private http: HttpClient, private imageHelper: ImageHelperService) {
 
-   }
+  }
 
    // GiftIdeasController
-   getAllGifts(): Observable<PagedListDTO<GiftIdeaDTO>>{
-    return this.http.get<PagedListDTO<GiftIdeaDTO>>(this.urlAPI + '/GiftIdeas/GetAll').
-    pipe(
-      map(x => x.items.map
-        ((y) => {  y.imageContentB64 = this.imageHelper.prepareBase64imagePrefix(y.imageContentB64); return y; })),
-      tap(console.log)
+  getAllGifts(): Observable<PagedListDTO<GiftIdeaDTO>> {
+    return this.http
+      .get<PagedListDTO<GiftIdeaDTO>>(this.urlAPI + '/GiftIdeas/GetAll')
+      .pipe(
+        map(ideas => ({
+          ...ideas,
+          items: ideas.items.map(item => ({
+            ...item,
+            imageContentB64: this.imageHelper.prepareBase64imagePrefix(item.imageContentB64)
+          }))
+        })),
+        tap(console.log)
       );
-   }
+  }
 
-   getGift(id: string): Observable<GiftIdeaDTO>{
+
+  getGift(id: string): Observable<GiftIdeaDTO> {
     return this.http.get<GiftIdeaDTO>(this.urlAPI + '/GiftIdeas/Get/' + id).
-    pipe(tap(console.log));
-   }
+      pipe(tap(console.log));
+  }
 
 
-   // StatusController
-   checkServerStatus(): Observable<any>{
-    return this.http.get<any>(this.urlAPI + '/Status/Online', {observe: 'response'}).
-    pipe(tap(console.log));
-   }
+  // StatusController
+  checkServerStatus(): Observable<any> {
+    return this.http.get<any>(this.urlAPI + '/Status/Online', { observe: 'response' }).
+      pipe(tap(console.log));
+  }
 
-   // RankingController
-   ChangeGiftIdeaRanking(id: string, increase: boolean): Observable<any>{
+  // RankingController
+  ChangeGiftIdeaRanking(id: string, increase: boolean): Observable<any> {
     return this.http.patch<GiftIdeaDTO>(this.urlAPI + '/Ranking/ChangeGiftIdeaRanking/' + id + '/' + increase, null).
-    pipe(tap(console.log));
-   }
+      pipe(tap(console.log));
+  }
 
-   // CommentController
-   CreateComment(comment: CommentDTO): Observable<CommentDTO> {
-    return this.http.post<CommentDTO>(this.urlAPI + '/Comment/Create' , comment).
-    pipe(tap(console.log));
-   }
+  // CommentController
+  CreateComment(comment: CommentDTO): Observable<CommentDTO> {
+    return this.http.post<CommentDTO>(this.urlAPI + '/Comment/Create', comment).
+      pipe(tap(console.log));
+  }
 
-   GetComment(id: string, pageIndex: string): Observable<PagedListDTO<CommentDTO>>{
+  GetComment(id: string, pageIndex: string): Observable<PagedListDTO<CommentDTO>> {
     let params = new HttpParams();
     params = params.append('pageNumber', (pageIndex as unknown as number + 1).toString());
-    return this.http.get<PagedListDTO<CommentDTO>>(this.urlAPI + '/Comment/Get/' + id, {params}).
-    pipe(tap(console.log));
+    return this.http.get<PagedListDTO<CommentDTO>>(this.urlAPI + '/Comment/Get/' + id, { params }).
+      pipe(tap(console.log));
   }
 
 }
