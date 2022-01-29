@@ -28,7 +28,14 @@
               </ng-container>
             </div>
           </div>
-
+          <mat-paginator
+          [length]="ideas.totalItems"
+          [pageSize]="ideas.pageSize"
+          [pageIndex]="ideas.currentPage - 1"
+          [pageSizeOptions]="[5, 10, 50, 100]"
+          (page)="pageEvent = getGifts($event)"
+          aria-label="Select page">
+          </mat-paginator>
         </ng-container>
 
 

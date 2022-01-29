@@ -19,9 +19,12 @@ export class HttpGiftsService {
   }
 
    // GiftIdeasController
-  getAllGifts(): Observable<PagedListDTO<GiftIdeaDTO>> {
+  getAllGifts(pageIndex: number, pageSize: number): Observable<PagedListDTO<GiftIdeaDTO>> {
+    let params = new HttpParams();
+    params = params.append('pageNumber', (pageIndex).toString());
+    params = params.append('pageSize', (pageSize).toString());
     return this.http
-      .get<PagedListDTO<GiftIdeaDTO>>(this.urlAPI + '/GiftIdeas/GetAll')
+      .get<PagedListDTO<GiftIdeaDTO>>(this.urlAPI + '/GiftIdeas/GetAll', {params})
       .pipe(
         map(ideas => ({
           ...ideas,

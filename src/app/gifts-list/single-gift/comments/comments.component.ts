@@ -58,19 +58,3 @@ commentToPost: Partial<CommentDTO> = {};
   }
 
 }
-function ShowSuccesSnackBar(): void {
-  const matConfig = new MatSnackBarConfig();
-  matConfig.duration = 3000;
-  matConfig.verticalPosition = 'top';
-  matConfig.panelClass = ['ok-snackbar'];
-  this.snackBar.open('Komentarz dodany!', '', matConfig);
-}
-
-function ShowErrorSnackBar(): void {
-  const matConfig = new MatSnackBarConfig();
-  matConfig.duration = 3000;
-  matConfig.verticalPosition = 'top';
-  matConfig.panelClass = ['err-snackbar'];
-  this.snackBar.open('Błąd Komentrz nie został dodany!', '', matConfig);
-}
-

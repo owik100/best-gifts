@@ -9,7 +9,7 @@ export class PLPaginatorIntl implements MatPaginatorIntl {
   // For internationalization, the `$localize` function from
   // the `@angular/localize` package can be used.
   firstPageLabel = $localize`Pierwsza strona`;
-  itemsPerPageLabel = $localize`Komentarzy na stronę:`;
+  itemsPerPageLabel = $localize`Pozycji na stronę:`;
   lastPageLabel = $localize`Ostatnia strona`;
 
   // You can set labels to an arbitrary string too, or dynamically compute

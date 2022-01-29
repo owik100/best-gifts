@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { Observable, of, Subscriber, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { GiftIdeaDTO } from '../models/GiftIdeaDTO';
@@ -15,10 +16,12 @@ export class GiftsListComponent implements OnInit, OnDestroy {
   giftIdeas: Observable<PagedListDTO<GiftIdeaDTO>>;
 
   public errorObject = null;
+  pageEvent: PageEvent;
+
   constructor(private http: HttpGiftsService) { }
 
   ngOnInit(): void {
-    this.giftIdeas = this.http.getAllGifts()
+    this.giftIdeas = this.http.getAllGifts( 1, 5)
       .pipe(
        catchError(err => {
           this.errorObject = err;
@@ -29,6 +32,16 @@ export class GiftsListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     console.log('GiftsListComponent destory');
+  }
+
+  public getGifts(event?: PageEvent): void{
+    this.giftIdeas = this.http.getAllGifts(event.pageIndex + 1, event.pageSize)
+    .pipe(
+     catchError(err => {
+        this.errorObject = err;
+        return throwError(err);
+      })
+    );
   }
 
 }
