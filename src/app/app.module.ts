@@ -41,6 +41,7 @@ import { CommentsComponent } from './gifts-list/single-gift/comments/comments.co
 import { ShareComponent } from './gifts-list/single-gift/share/share.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PLPaginatorIntl } from './CustomPaginatorIntl';
+import { PostGiftComponent } from './post-gift/post-gift.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { PLPaginatorIntl } from './CustomPaginatorIntl';
     ErrorButtonsComponent,
     RankingComponent,
     CommentsComponent,
-    ShareComponent
+    ShareComponent,
+    PostGiftComponent
   ],
   imports: [
     BrowserModule,

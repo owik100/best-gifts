@@ -1,0 +1,51 @@
+<h2 class="text-center">Podziel się swoim pomysłem z innymi i pomóż im wybrać najlepszy prezent! </h2>
+
+<div class="containerForm">
+  <form #giftForm="ngForm" (ngSubmit)="postGift();">
+    <p>
+      <mat-form-field id="nickInput" appearance="legacy">
+        <mat-label>Nazwa pomysłu</mat-label>
+        <input matInput required type="text" [(ngModel)]="giftToPost.name" name="name" />
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field id="contentInput" appearance="legacy">
+        <mat-label>Opis</mat-label>
+        <textarea rows="5" matInput required type="text" [(ngModel)]="giftToPost.description" name="description">
+              </textarea>
+      </mat-form-field>
+    </p>
+
+    <p>
+        <mat-form-field id="contentInput" appearance="legacy">
+          <mat-label>Autor (Twój nick)</mat-label>
+          <input matInput required type="text" [(ngModel)]="giftToPost.author" name="author"/>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field id="contentInput" appearance="legacy">
+          <mat-label>Odnośnik do zewnętrznej strony (Np. do sklepu)</mat-label>
+          <input type="url" matInput [(ngModel)]="giftToPost.externalUrl" name="externalUrl"/>
+        </mat-form-field>
+    </p>
+    <p>
+
+        <!-- <button (click)="fileInput.click()">
+            <md-icon>library_add</md-icon>
+            <span>Select</span>
+            <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />
+          </button>
+
+
+        <mat-form-field id="contentInput" appearance="legacy">
+          <mat-label>Zdjęcie prezentu</mat-label>
+          <input type="file" accept="image/*" matInput [(ngModel)]="giftToPost.imageContentB64" name="imageContentB64"/>
+        </mat-form-field> -->
+    </p>
+
+
+    <button id="submitBtn" [disabled]="giftForm.invalid" mat-raised-button color="primary" type="submit">Wyślij</button>
+  </form>
+
+</div>

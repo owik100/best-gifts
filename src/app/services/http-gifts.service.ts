@@ -37,6 +37,11 @@ export class HttpGiftsService {
       );
   }
 
+  postGift(gift: GiftIdeaDTO): Observable<GiftIdeaDTO>{
+    return this.http.post<GiftIdeaDTO>(this.urlAPI + '/GiftIdeas/PostGift', gift).
+    pipe(tap(console.log));
+  }
+
 
   getGift(id: string): Observable<GiftIdeaDTO> {
     return this.http.get<GiftIdeaDTO>(this.urlAPI + '/GiftIdeas/Get/' + id).
