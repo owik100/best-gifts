@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { GiftIdeaDTO } from '../models/GiftIdeaDTO';
 import { HttpGiftsService } from '../services/http-gifts.service';
+import { faFileUpload, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-gift',
@@ -11,10 +13,33 @@ import { HttpGiftsService } from '../services/http-gifts.service';
 export class PostGiftComponent implements OnInit {
 
   giftToPost: Partial<GiftIdeaDTO> = {};
+  faFileUpload = faFileUpload;
+  faTrashAlt = faTrashAlt;
+  imageSrc = null;
 
-  constructor(private http: HttpGiftsService, private snackBar: MatSnackBar) { }
+  constructor(private http: HttpGiftsService, private snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  prepareFile(event): void{
+    const reader = new FileReader();
+    const file: File = event.target.files[0];
+    if (file != null){
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.imageSrc = reader.result as string;
+        const b64WithoutPrefix = this.imageSrc.split('base64,')[1];
+        this.giftToPost.imageContentB64 = b64WithoutPrefix;
+      };
+
+    }
+    console.log(file);
+  }
+
+  deleteImage(): void{
+    this.imageSrc = null;
   }
 
   postGift(): void{
@@ -26,7 +51,7 @@ export class PostGiftComponent implements OnInit {
         matConfig.panelClass = ['ok-snackbar'];
         this.snackBar.open('Pomysł został dodany!', '', matConfig);
 
-        // Redirect to mainPage
+        this.router.navigate([`gift/${data.giftIdeaId}`]);
       },
       err => {
         (console.log('ERROR', err));
@@ -34,7 +59,7 @@ export class PostGiftComponent implements OnInit {
         matConfig.duration = 3000;
         matConfig.verticalPosition = 'top';
         matConfig.panelClass = ['err-snackbar'];
-        this.snackBar.open('Błąd Komentrz nie został dodany!', '', matConfig);
+        this.snackBar.open('Błąd Pomysł nie został dodany!', '', matConfig);
       },
     );
   }

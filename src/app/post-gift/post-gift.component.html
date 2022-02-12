@@ -29,23 +29,22 @@
           <input type="url" matInput [(ngModel)]="giftToPost.externalUrl" name="externalUrl"/>
         </mat-form-field>
     </p>
-    <p>
 
-        <!-- <button (click)="fileInput.click()">
-            <md-icon>library_add</md-icon>
-            <span>Select</span>
-            <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />
-          </button>
+      <div class="flexContainer">
+        <button type="button" mat-stroked-button *ngIf="imageSrc == null" mat-raised-button  (click)="imgFileInput.click();">Dodaj zdjęcie<fa-icon style="margin-left: 5px;" [icon]="faFileUpload"></fa-icon></button>
+        <button type="button" color="warn" *ngIf="imageSrc" style="margin-left:5px;margin-bottom:5px;"  mat-raised-button  (click)="deleteImage();">Usuń zdjęcie<fa-icon style="margin-left:5px;" [icon]="faTrashAlt"></fa-icon></button>
+        <div>
+          <img [src]="imageSrc" *ngIf="imageSrc"  style="margin-left:20px;">
+        </div>
 
-
-        <mat-form-field id="contentInput" appearance="legacy">
-          <mat-label>Zdjęcie prezentu</mat-label>
-          <input type="file" accept="image/*" matInput [(ngModel)]="giftToPost.imageContentB64" name="imageContentB64"/>
-        </mat-form-field> -->
-    </p>
+        <input hidden accept="image/*" type="file" #imgFileInput (change)="prepareFile($event)"/>
+      </div>
 
 
-    <button id="submitBtn" [disabled]="giftForm.invalid" mat-raised-button color="primary" type="submit">Wyślij</button>
+      <div style="text-align:center;">
+        <button id="submitBtn" [disabled]="giftForm.invalid" mat-raised-button color="primary" style="margin-top:10px;" type="submit">Wyślij pomysł</button>
+      </div>
+
   </form>
 
 </div>

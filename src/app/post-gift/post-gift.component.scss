@@ -1,3 +1,35 @@
 .mat-form-field{
     width:90vw !important;
  }
+
+ .flexContainer{
+     display: flex;
+     justify-content: flex-start;
+     align-items: center;
+ }
+
+ img{
+     max-width: 400px;
+     max-height: 400px;
+ }
+ 
+ @media screen and (max-width: 992px) {
+    img {
+        max-width: 300px;
+        max-height: 300px;
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    img {
+        max-width: 250px;
+        max-height: 250px;
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    img {
+        max-width: 200px;
+        max-height: 200px;
+    }
+  }
