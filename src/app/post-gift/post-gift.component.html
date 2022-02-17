@@ -1,50 +1,90 @@
-<h2 class="text-center">Podziel się swoim pomysłem z innymi i pomóż im wybrać najlepszy prezent! </h2>
+<div *ngIf="allCategoriesObj; else pending">
+  <h2 class="text-center">Podziel się swoim pomysłem z innymi i pomóż im wybrać najlepszy prezent! </h2>
 
-<div class="containerForm">
-  <form #giftForm="ngForm" (ngSubmit)="postGift();">
-    <p>
-      <mat-form-field id="nickInput" appearance="legacy">
-        <mat-label>Nazwa pomysłu</mat-label>
-        <input matInput required type="text" [(ngModel)]="giftToPost.name" name="name" />
-      </mat-form-field>
-    </p>
-
-    <p>
-      <mat-form-field id="contentInput" appearance="legacy">
-        <mat-label>Opis</mat-label>
-        <textarea rows="5" matInput required type="text" [(ngModel)]="giftToPost.description" name="description">
-              </textarea>
-      </mat-form-field>
-    </p>
-
-    <p>
-        <mat-form-field id="contentInput" appearance="legacy">
-          <mat-label>Autor (Twój nick)</mat-label>
-          <input matInput required type="text" [(ngModel)]="giftToPost.author" name="author"/>
+  <div class="containerForm">
+    <form #giftForm="ngForm" (ngSubmit)="postGift();">
+      <p>
+        <mat-form-field id="nickInput" appearance="legacy">
+          <mat-label>Nazwa pomysłu</mat-label>
+          <input matInput required type="text" [(ngModel)]="giftToPost.name" name="name" />
         </mat-form-field>
-    </p>
-    <p>
+      </p>
+  
+      <p>
         <mat-form-field id="contentInput" appearance="legacy">
-          <mat-label>Odnośnik do zewnętrznej strony (Np. do sklepu)</mat-label>
-          <input type="url" matInput [(ngModel)]="giftToPost.externalUrl" name="externalUrl"/>
+          <mat-label>Opis</mat-label>
+          <textarea rows="5" matInput required type="text" [(ngModel)]="giftToPost.description" name="description">
+                </textarea>
         </mat-form-field>
-    </p>
-
-      <div class="flexContainer">
-        <button type="button" mat-stroked-button *ngIf="imageSrc == null" mat-raised-button  (click)="imgFileInput.click();">Dodaj zdjęcie<fa-icon style="margin-left: 5px;" [icon]="faFileUpload"></fa-icon></button>
-        <button type="button" color="warn" *ngIf="imageSrc" style="margin-left:5px;margin-bottom:5px;"  mat-raised-button  (click)="deleteImage();">Usuń zdjęcie<fa-icon style="margin-left:5px;" [icon]="faTrashAlt"></fa-icon></button>
-        <div>
-          <img [src]="imageSrc" *ngIf="imageSrc"  style="margin-left:20px;">
+      </p>
+  
+      <p>
+          <mat-form-field id="contentInput" appearance="legacy">
+            <mat-label>Autor (Twój nick)</mat-label>
+            <input matInput required type="text" [(ngModel)]="giftToPost.author" name="author"/>
+          </mat-form-field>
+      </p>
+      <p>
+          <mat-form-field id="contentInput" appearance="legacy">
+            <mat-label>Odnośnik do zewnętrznej strony (Np. do sklepu)</mat-label>
+            <input type="url" matInput [(ngModel)]="giftToPost.externalUrl" name="externalUrl"/>
+          </mat-form-field>
+      </p>
+  
+        <mat-form-field class="example-chip-list" appearance="fill">
+          <mat-label>Kategorie</mat-label>
+          <mat-chip-list #chipList aria-label="Fruit selection">
+            <mat-chip
+              *ngFor="let category of categories"
+              (removed)="remove(category)">
+              {{category}}
+           
+              <fa-icon style="margin-left: 5px;" matChipRemove [icon]="faBan"></fa-icon>
+  
+            </mat-chip>
+            <input
+              placeholder="Dodaj kategorie..."
+              #fruitInput
+              [formControl]="fruitCtrl"
+              [matAutocomplete]="auto"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              (matChipInputTokenEnd)="add($event)">
+          </mat-chip-list>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+            <mat-option *ngFor="let category of filteredFruits | async" [value]="category">
+              {{category}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+  
+        <div class="flexContainer">
+          <button type="button" mat-stroked-button *ngIf="imageSrc == null" mat-raised-button  (click)="imgFileInput.click();">Dodaj zdjęcie<fa-icon style="margin-left: 5px;" [icon]="faFileUpload"></fa-icon></button>
+          <button type="button" color="warn" *ngIf="imageSrc" style="margin-left:5px;margin-bottom:5px;"  mat-raised-button  (click)="deleteImage();">Usuń zdjęcie<fa-icon style="margin-left:5px;" [icon]="faTrashAlt"></fa-icon></button>
+          <div>
+            <img [src]="imageSrc" *ngIf="imageSrc"  style="margin-left:20px;">
+          </div>
+  
+          <input hidden accept="image/*" type="file" #imgFileInput (change)="prepareFile($event)"/>
         </div>
-
-        <input hidden accept="image/*" type="file" #imgFileInput (change)="prepareFile($event)"/>
-      </div>
-
-
-      <div style="text-align:center;">
-        <button id="submitBtn" [disabled]="giftForm.invalid" mat-raised-button color="primary" style="margin-top:10px;" type="submit">Wyślij pomysł</button>
-      </div>
-
-  </form>
-
+  
+        <div style="text-align:center;">
+          <button id="submitBtn" [disabled]="giftForm.invalid" mat-raised-button color="primary" style="margin-top:10px;" type="submit">Wyślij pomysł</button>
+        </div>
+  
+    </form>
+  
+  </div>
 </div>
+
+
+
+
+<ng-template #pending>
+  <ng-container *ngIf="isLoading; then loading; else problem;"></ng-container>
+</ng-template>
+
+
+<ng-template #loading>
+  <mat-spinner></mat-spinner>
+</ng-template>

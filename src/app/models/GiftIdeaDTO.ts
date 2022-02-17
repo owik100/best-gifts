@@ -1,5 +1,5 @@
+import { CategoryDTO } from './CategoryDTO';
 import { CommentDTO } from './CommentDTO';
-import { GiftIdeaCategoryDTO } from './GiftIdeaCategoryDTO';
 import { PagedListDTO } from './PagedListDTO';
 
 export interface GiftIdeaDTO{
@@ -13,5 +13,5 @@ export interface GiftIdeaDTO{
     CreationTime: Date;
 
     commentsDTO: PagedListDTO<CommentDTO>;
-    giftIdeaCategoryDTO: GiftIdeaCategoryDTO[];
+    categoriesDTO: CategoryDTO[];
 }

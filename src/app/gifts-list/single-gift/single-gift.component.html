@@ -18,8 +18,8 @@
         <mat-divider></mat-divider>
         <p>Kategorie:</p>
         <mat-chip-list aria-label="Fish selection">
-          <div *ngFor="let category of singleGift.giftIdeaCategoryDTO">
-            <mat-chip>{{category.categoryDTO.name}}</mat-chip>
+          <div *ngFor="let category of singleGift.categoriesDTO">
+            <mat-chip>{{category.name}}</mat-chip>
           </div>
         </mat-chip-list>
         <mat-divider></mat-divider>
@@ -40,7 +40,6 @@
    
 </div>
 
-<!-- Zamienić na switcha -->
   <ng-template #pending>
     <ng-container *ngIf="isLoading; then loading; else problem;"></ng-container>
   </ng-template>

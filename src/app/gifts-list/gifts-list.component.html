@@ -1,10 +1,20 @@
+
+        
         <ng-container *ngIf='(giftIdeas | async) as ideas else pending'>
+          <mat-paginator
+[length]="ideas.totalItems"
+[pageSize]="ideas.pageSize"
+[pageIndex]="ideas.currentPage - 1"
+[pageSizeOptions]="[5, 10, 50, 100]"
+(page)="pageEvent = getGifts($event)"
+aria-label="Select page">
+</mat-paginator>
           <div class="container px-4">
             <div class="row gy-3 gx-5">
               <ng-container *ngFor="let giftIdea of ideas.items">
-                <div class="card col col-lg-3 col-md-4 col-sm-8 col-12">
+                <div class="card col col-lg-3 col-md-4 col-sm-8 col-12" style="margin-bottom: 5px;">
 
-                    <div>
+                    <div class="imgContainer">
                         <a class="card-title" [routerLink]="['/gift', giftIdea.giftIdeaId]"><h2 class="text-center">{{giftIdea.name}}</h2>
                           <img class="img-fluid" *ngIf="giftIdea.imageContentB64; else defaultImage" src="{{giftIdea.imageContentB64}}"/>
                           <ng-template #defaultImage>
@@ -28,19 +38,12 @@
               </ng-container>
             </div>
           </div>
-          <mat-paginator
-          [length]="ideas.totalItems"
-          [pageSize]="ideas.pageSize"
-          [pageIndex]="ideas.currentPage - 1"
-          [pageSizeOptions]="[5, 10, 50, 100]"
-          (page)="pageEvent = getGifts($event)"
-          aria-label="Select page">
-          </mat-paginator>
+        
+
         </ng-container>
 
 
 
-<!-- Zamienić na switcha -->
   <ng-template #pending>
     <ng-container *ngIf="errorObject; then problem; else loading;"></ng-container>
   </ng-template>

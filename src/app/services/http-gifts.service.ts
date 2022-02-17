@@ -5,6 +5,7 @@ import { map, tap } from 'rxjs/operators';
 import { CommentDTO } from '../models/CommentDTO';
 import { GiftIdeaDTO } from '../models/GiftIdeaDTO';
 import { PagedListDTO } from '../models/PagedListDTO';
+import { CategoryDTO } from '../models/CategoryDTO';
 import { ImageHelperService } from './image-helper.service';
 
 @Injectable({
@@ -48,6 +49,11 @@ export class HttpGiftsService {
       pipe(tap(console.log));
   }
 
+  // CategoryController
+  getAllCategories(): Observable<CategoryDTO[]> {
+    return this.http.get<CategoryDTO[]>(this.urlAPI + '/Category/GetAll').
+    pipe(tap(console.log));
+  }
 
   // StatusController
   checkServerStatus(): Observable<any> {
