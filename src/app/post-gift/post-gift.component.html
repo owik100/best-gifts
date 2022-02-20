@@ -33,7 +33,7 @@
   
         <mat-form-field class="example-chip-list" appearance="fill">
           <mat-label>Kategorie</mat-label>
-          <mat-chip-list #chipList aria-label="Fruit selection">
+          <mat-chip-list #chipList aria-label="Category selection">
             <mat-chip
               *ngFor="let category of categories"
               (removed)="remove(category)">
@@ -44,15 +44,15 @@
             </mat-chip>
             <input
               placeholder="Dodaj kategorie..."
-              #fruitInput
-              [formControl]="fruitCtrl"
+              #categoryInput
+              [formControl]="categoriesCtrl"
               [matAutocomplete]="auto"
               [matChipInputFor]="chipList"
               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
               (matChipInputTokenEnd)="add($event)">
           </mat-chip-list>
           <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-            <mat-option *ngFor="let category of filteredFruits | async" [value]="category">
+            <mat-option *ngFor="let category of filteredCategories | async" [value]="category">
               {{category}}
             </mat-option>
           </mat-autocomplete>

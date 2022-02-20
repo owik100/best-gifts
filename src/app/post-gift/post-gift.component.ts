@@ -13,10 +13,6 @@ import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import { map, startWith } from 'rxjs/operators';
 import { CategoryDTO } from '../models/CategoryDTO';
 
-export interface Fruit {
-  name: string;
-}
-
 @Component({
   selector: 'app-post-gift',
   templateUrl: './post-gift.component.html',
@@ -31,8 +27,8 @@ export class PostGiftComponent implements OnInit {
   faBan = faBan;
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  fruitCtrl = new FormControl();
-  filteredFruits: Observable<string[]>;
+  categoriesCtrl = new FormControl();
+  filteredCategories: Observable<string[]>;
   categories: string[] = [];
   isLoading = false;
 
@@ -42,14 +38,14 @@ export class PostGiftComponent implements OnInit {
 
   allCategories: string[] = [];
 
-  @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
+  @ViewChild('categoryInput') categoryInput: ElementRef<HTMLInputElement>;
 
   // tslint:disable-next-line:max-line-length
   constructor(private http: HttpGiftsService, private snackBar: MatSnackBar, private router: Router)
   {
-    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
+    this.filteredCategories = this.categoriesCtrl.valueChanges.pipe(
     startWith(null),
-    map((fruit: string | null) => (fruit ? this._filter(fruit) : this.allCategories.slice())),
+    map((category: string | null) => (category ? this._filter(category) : this.allCategories.slice())),
   ); }
 
   ngOnInit(): void {
@@ -86,12 +82,12 @@ export class PostGiftComponent implements OnInit {
       event.input.value = '';
      }
 
-    this.fruitCtrl.setValue(null);
+    this.categoriesCtrl.setValue(null);
     console.log(this.categories);
   }
 
-  remove(fruit: string): void {
-    const index = this.categories.indexOf(fruit);
+  remove(category: string): void {
+    const index = this.categories.indexOf(category);
 
     if (index >= 0) {
       this.categories.splice(index, 1);
@@ -100,14 +96,14 @@ export class PostGiftComponent implements OnInit {
 
   selected(event: MatAutocompleteSelectedEvent): void {
     this.categories.push(event.option.viewValue);
-    this.fruitInput.nativeElement.value = '';
-    this.fruitCtrl.setValue(null);
+    this.categoryInput.nativeElement.value = '';
+    this.categoriesCtrl.setValue(null);
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.allCategories.filter(fruit => fruit.toLowerCase().includes(filterValue));
+    return this.allCategories.filter(category => category.toLowerCase().includes(filterValue));
   }
 
   prepareFile(event): void{
