@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { GiftIdeaDTO } from '../models/GiftIdeaDTO';
 import { HttpGiftsService } from '../services/http-gifts.service';
@@ -18,7 +18,7 @@ import { CategoryDTO } from '../models/CategoryDTO';
   templateUrl: './post-gift.component.html',
   styleUrls: ['./post-gift.component.scss']
 })
-export class PostGiftComponent implements OnInit {
+export class PostGiftComponent implements OnInit, OnDestroy {
 
   giftToPost: Partial<GiftIdeaDTO> = {};
   faFileUpload = faFileUpload;
@@ -165,4 +165,7 @@ export class PostGiftComponent implements OnInit {
     );
   }
 
+  ngOnDestroy(): void {
+    this.allCategoriesSubscribtion.unsubscribe();
+  }
 }

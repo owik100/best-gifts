@@ -15,12 +15,13 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
-import { LayoutModule } from '@angular/cdk/layout';
+import {LayoutModule} from '@angular/cdk/layout';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule } from '@angular/material/input';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatSelectModule} from '@angular/material/select';
 
 // Others
 import { ShareButtonModule } from 'ngx-sharebuttons/button';
@@ -85,6 +86,7 @@ import { PostGiftComponent } from './post-gift/post-gift.component';
     MatPaginatorModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
+    MatSelectModule
   ],
   providers: [CookieService,
     {provide: MatPaginatorIntl, useClass: PLPaginatorIntl}],

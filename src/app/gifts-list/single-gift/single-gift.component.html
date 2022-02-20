@@ -12,7 +12,7 @@
         <h1 class="mat-display-5">Autor: {{singleGift.author}}</h1>
         <h5>Data dodania: {{singleGift.creationTime | date:'dd MM yyyy HH:mm'}}</h5>
         <div *ngIf="singleGift.externalUrl" id="externalLink">
-          <a target="_blank" href="{{singleGift.externalUrl}}">{{singleGift.externalUrl}}</a>
+          <a style="cursor: pointer;" (click)="goToLink(singleGift.externalUrl)">{{singleGift.externalUrl}}</a>
         </div>
         <h3>{{singleGift.description}}</h3>
         <mat-divider></mat-divider>

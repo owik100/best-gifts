@@ -105,6 +105,11 @@ export class SingleGiftComponent implements OnInit, OnDestroy, AfterViewInit {
     );
   }
 
+  goToLink(url: string): void{
+    console.log(url);
+    window.open( url, '_blank');
+}
+
   ngAfterViewInit(): void{
     this.childRankingQueryList.changes.subscribe((result: QueryList <RankingComponent>) =>
     {

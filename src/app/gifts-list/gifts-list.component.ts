@@ -4,6 +4,7 @@ import { Observable, of, Subscriber, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { GiftIdeaDTO } from '../models/GiftIdeaDTO';
 import { PagedListDTO } from '../models/PagedListDTO';
+import { SortingModel } from '../models/SortingModel';
 import { HttpGiftsService } from '../services/http-gifts.service';
 import { ImageHelperService } from '../services/image-helper.service';
 
@@ -18,10 +19,12 @@ export class GiftsListComponent implements OnInit, OnDestroy {
   public errorObject = null;
   pageEvent: PageEvent;
 
+  selectedSorting = SortingModel[SortingModel.Latest];
+
   constructor(private http: HttpGiftsService) { }
 
   ngOnInit(): void {
-    this.giftIdeas = this.http.getAllGifts( 1, 5)
+    this.giftIdeas = this.http.getAllGifts(1, 5, SortingModel[this.selectedSorting])
       .pipe(
        catchError(err => {
           this.errorObject = err;
@@ -35,13 +38,24 @@ export class GiftsListComponent implements OnInit, OnDestroy {
   }
 
   public getGifts(event?: PageEvent): void{
-    this.giftIdeas = this.http.getAllGifts(event.pageIndex + 1, event.pageSize)
+    this.giftIdeas = this.http.getAllGifts(event.pageIndex + 1, event.pageSize, SortingModel[this.selectedSorting])
     .pipe(
      catchError(err => {
         this.errorObject = err;
         return throwError(err);
       })
     );
+  }
+
+  onSelectionChange(event): void{
+  console.log(this.selectedSorting);
+  this.giftIdeas = this.http.getAllGifts(1, 5, SortingModel[this.selectedSorting])
+      .pipe(
+       catchError(err => {
+          this.errorObject = err;
+          return throwError(err);
+        })
+      );
   }
 
 }

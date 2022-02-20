@@ -7,6 +7,7 @@ import { GiftIdeaDTO } from '../models/GiftIdeaDTO';
 import { PagedListDTO } from '../models/PagedListDTO';
 import { CategoryDTO } from '../models/CategoryDTO';
 import { ImageHelperService } from './image-helper.service';
+import { SortingModel } from '../models/SortingModel';
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +21,11 @@ export class HttpGiftsService {
   }
 
    // GiftIdeasController
-  getAllGifts(pageIndex: number, pageSize: number): Observable<PagedListDTO<GiftIdeaDTO>> {
+  getAllGifts(pageIndex: number, pageSize: number, sort: SortingModel): Observable<PagedListDTO<GiftIdeaDTO>> {
     let params = new HttpParams();
     params = params.append('pageNumber', (pageIndex).toString());
     params = params.append('pageSize', (pageSize).toString());
+    params = params.append('sort', (sort).toString());
     return this.http
       .get<PagedListDTO<GiftIdeaDTO>>(this.urlAPI + '/GiftIdeas/GetAll', {params})
       .pipe(
