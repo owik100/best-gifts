@@ -8,6 +8,8 @@ import { PagedListDTO } from '../models/PagedListDTO';
 import { CategoryDTO } from '../models/CategoryDTO';
 import { ImageHelperService } from './image-helper.service';
 import { SortingModel } from '../models/SortingModel';
+import { FilterModel } from '../models/FilterModel';
+
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +25,18 @@ export class HttpGiftsService {
    // GiftIdeasController
   getAllGifts(pageIndex: number, pageSize: number, sort: SortingModel): Observable<PagedListDTO<GiftIdeaDTO>> {
     let params = new HttpParams();
+    const filter: FilterModel = {
+      author: 'www',
+      giftName: 'www2',
+      categoryID: 9
+    };
+
     params = params.append('pageNumber', (pageIndex).toString());
     params = params.append('pageSize', (pageSize).toString());
     params = params.append('sort', (sort).toString());
+    params = params.append('author', (filter.author));
+    params = params.append('giftName', (filter.giftName));
+    params = params.append('categoryID', (filter.categoryID).toString());
     return this.http
       .get<PagedListDTO<GiftIdeaDTO>>(this.urlAPI + '/GiftIdeas/GetAll', {params})
       .pipe(
