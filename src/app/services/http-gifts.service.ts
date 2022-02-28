@@ -23,20 +23,19 @@ export class HttpGiftsService {
   }
 
    // GiftIdeasController
-  getAllGifts(pageIndex: number, pageSize: number, sort: SortingModel): Observable<PagedListDTO<GiftIdeaDTO>> {
+  getAllGifts(pageIndex: number, pageSize: number, sort: SortingModel, filter: FilterModel): Observable<PagedListDTO<GiftIdeaDTO>> {
     let params = new HttpParams();
-    const filter: FilterModel = {
-      author: 'www',
-      giftName: 'www2',
-      categoryID: 9
-    };
+
+    const filterAuthor = filter?.author?.length > 0 ? filter.author : '';
+    const filterGiftName = filter?.giftName?.length > 0 ? filter.giftName : '';
+    const filterCategoryID = filter?.categoryID > -1 ? filter.categoryID : -1;
 
     params = params.append('pageNumber', (pageIndex).toString());
     params = params.append('pageSize', (pageSize).toString());
     params = params.append('sort', (sort).toString());
-    params = params.append('author', (filter.author));
-    params = params.append('giftName', (filter.giftName));
-    params = params.append('categoryID', (filter.categoryID).toString());
+    params = params.append('author', (filterAuthor));
+    params = params.append('giftName', (filterGiftName));
+    params = params.append('categoryID', (filterCategoryID).toString());
     return this.http
       .get<PagedListDTO<GiftIdeaDTO>>(this.urlAPI + '/GiftIdeas/GetAll', {params})
       .pipe(

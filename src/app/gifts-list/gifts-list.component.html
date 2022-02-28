@@ -4,7 +4,7 @@
   <div id="paginationSorting">
     <mat-form-field appearance="standard">
       <mat-label>Sortuj</mat-label>
-      <mat-select [(value)]="selectedSorting" (selectionChange)="onSelectionChange($event)">
+      <mat-select [(value)]="selectedSorting" (selectionChange)="search($event)">
         <mat-option value="Latest">Najnowsze</mat-option>
         <mat-option value="Oldest">Najstarsze</mat-option>
         <mat-option value="BestRated">Najwyżej ocenione</mat-option>
@@ -22,7 +22,38 @@
     </mat-paginator>
   </div>
 
+  <div id="searchPanel">
 
+
+<mat-expansion-panel (opened)="panelOpenState = true"
+  (closed)="panelOpenState = false">
+
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Szukaj
+    </mat-panel-title>
+    <mat-panel-description>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <mat-form-field appearance="legacy" class="matFormFilter">
+    <mat-label>Nazwa</mat-label>
+    <input rows="5" matInput type="text" [(ngModel)]="filterModel.giftName" name="description" />
+  </mat-form-field>
+
+    <mat-form-field appearance="legacy" class="matFormFilter">
+      <mat-label>Autor</mat-label>
+      <input matInput type="text" [(ngModel)]="filterModel.author" name="author"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy" class="matFormFilter">
+      <mat-label>Kategoria</mat-label>
+      <input matInput type="text" [(ngModel)]="filterModel.categoryID" name="author"/>
+    </mat-form-field>
+
+    <button id="filterBtn" mat-raised-button color="primary" (click)="search()">Szukaj</button>
+</mat-expansion-panel>
+
+</div>
           <div class="container px-4">
             <div class="row gy-3 gx-5">
               <ng-container *ngFor="let giftIdea of ideas.items">

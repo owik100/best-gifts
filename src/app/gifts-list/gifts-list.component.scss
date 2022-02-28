@@ -34,11 +34,15 @@ a:hover{
     height: 35vh;
 }
 
-#paginationSorting{
+#paginationSorting, #searchPanel{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-content: space-around;
     justify-content: center;
     align-items: center;
+}
+
+.matFormFilter{
+    margin-right: 15px;
 }
