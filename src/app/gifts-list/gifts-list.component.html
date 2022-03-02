@@ -45,9 +45,13 @@
       <input matInput type="text" [(ngModel)]="filterModel.author" name="author"/>
     </mat-form-field>
 
-    <mat-form-field appearance="legacy" class="matFormFilter">
+    <mat-form-field appearance="legacy">
       <mat-label>Kategoria</mat-label>
-      <input matInput type="text" [(ngModel)]="filterModel.categoryID" name="author"/>
+      <mat-select (selectionChange)="onCategoryChange($event)">
+        <mat-option *ngFor="let cat of allCategoriesObj" [value]="cat.categoryId">
+          {{cat.name}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
 
     <button id="filterBtn" mat-raised-button color="primary" (click)="search()">Szukaj</button>

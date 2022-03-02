@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { Observable, of, Subscriber, throwError } from 'rxjs';
+import { Observable, of, Subscriber, Subscription, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { CategoryDTO } from '../models/CategoryDTO';
 import { FilterModel } from '../models/FilterModel';
 import { GiftIdeaDTO } from '../models/GiftIdeaDTO';
 import { PagedListDTO } from '../models/PagedListDTO';
@@ -22,6 +23,9 @@ export class GiftsListComponent implements OnInit, OnDestroy {
 
   selectedSorting = SortingModel[SortingModel.Latest];
   filterModel: FilterModel = {} as FilterModel;
+  allCategoriesObj: CategoryDTO[] = {} as CategoryDTO[];
+  allCategoriesObservable: Observable<CategoryDTO[]>;
+  allCategoriesSubscribtion: Subscription;
 
   constructor(private http: HttpGiftsService) { }
 
@@ -33,10 +37,21 @@ export class GiftsListComponent implements OnInit, OnDestroy {
           return throwError(err);
         })
       );
+
+    this.allCategoriesObservable = this.http.getAllCategories();
+
+    this.allCategoriesSubscribtion = this.allCategoriesObservable.
+      subscribe(
+          data => {
+            this.allCategoriesObj = data;
+          },
+          err => {
+            (console.log('ERROR', err));
+      });
   }
 
   ngOnDestroy(): void {
-    console.log('GiftsListComponent destory');
+    this.allCategoriesSubscribtion.unsubscribe();
   }
 
   public getGifts(event?: PageEvent): void{
@@ -50,14 +65,11 @@ export class GiftsListComponent implements OnInit, OnDestroy {
   }
 
   onSelectionChange(): void{
-  console.log(this.selectedSorting);
-  this.giftIdeas = this.http.getAllGifts(1, 5, SortingModel[this.selectedSorting], this.filterModel)
-      .pipe(
-       catchError(err => {
-          this.errorObject = err;
-          return throwError(err);
-        })
-      );
+  this.search();
+  }
+
+  onCategoryChange(event): void {
+    this.filterModel.categoryID = event.value;
   }
 
   search(): void{
