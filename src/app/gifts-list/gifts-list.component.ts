@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable, of, Subscriber, Subscription, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { CategoryDTO } from '../models/CategoryDTO';
@@ -27,7 +28,7 @@ export class GiftsListComponent implements OnInit, OnDestroy {
   allCategoriesObservable: Observable<CategoryDTO[]>;
   allCategoriesSubscribtion: Subscription;
 
-  constructor(private http: HttpGiftsService) { }
+  constructor(private http: HttpGiftsService, private cookieService: CookieService) { }
 
   ngOnInit(): void {
     this.giftIdeas = this.http.getAllGifts(1, 5, SortingModel[this.selectedSorting], this.filterModel)
@@ -38,20 +39,35 @@ export class GiftsListComponent implements OnInit, OnDestroy {
         })
       );
 
-    this.allCategoriesObservable = this.http.getAllCategories();
-
-    this.allCategoriesSubscribtion = this.allCategoriesObservable.
-      subscribe(
-          data => {
-            this.allCategoriesObj = data;
-          },
-          err => {
-            (console.log('ERROR', err));
-      });
+    this.CheckCategoriesInCookie();
   }
 
   ngOnDestroy(): void {
-    this.allCategoriesSubscribtion.unsubscribe();
+    this?.allCategoriesSubscribtion?.unsubscribe();
+  }
+
+
+
+  CheckCategoriesInCookie(): void{
+    const categoriesExists: boolean = this.cookieService.check('categories');
+    if (categoriesExists){
+      const catsJSON = this.cookieService.get('categories');
+      this.allCategoriesObj = JSON.parse(catsJSON);
+    }
+    else{
+      this.allCategoriesObservable = this.http.getAllCategories();
+
+      this.allCategoriesSubscribtion = this.allCategoriesObservable.
+        subscribe(
+            data => {
+              this.allCategoriesObj = data;
+              const categoriesJson = JSON.stringify(this.allCategoriesObj );
+              this.cookieService.set(`categories`, categoriesJson,  new Date(new Date().getTime() +  1000 * 60 * 60) , '/');
+            },
+            err => {
+              (console.log('ERROR', err));
+        });
+    }
   }
 
   public getGifts(event?: PageEvent): void{
