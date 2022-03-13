@@ -1,7 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable, of, Subscriber, Subscription, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -40,6 +40,8 @@ export class GiftsListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
+    this.CheckCategoriesInCookie();
+
     this.route.queryParamMap.subscribe( paramMap => {
 
       this.pageNumber = paramMap.get('pageNumber') as unknown as number > 0 ? paramMap.get('pageNumber') as unknown as number : 1;
@@ -59,7 +61,7 @@ export class GiftsListComponent implements OnInit, OnDestroy {
         })
       );
 
-    this.CheckCategoriesInCookie();
+
   }
 
   ngOnDestroy(): void {
@@ -93,12 +95,12 @@ export class GiftsListComponent implements OnInit, OnDestroy {
   public getGifts(event?: PageEvent): void{
     this.pageNumber = event.pageIndex + 1;
     this.pageSize = event.pageSize;
-    
-    let queryParamsa = new HttpParams();
-    queryParamsa = queryParamsa.append('pageNumber', (this.pageNumber).toString());
-    // Dodac jezeli inne od defoltowych
-        // tslint:disable-next-line:max-line-length
-    this.router.navigate(['/gifts'], { queryParams: { pageNumber: this.pageNumber,  pageSize: this.pageSize, sort: SortingModel[this.selectedSorting], author: this.filterModel.author, giftName: this.filterModel.giftName, categoryID: this.filterModel.categoryID } });
+
+    const queryParamsObj = this.prepareRouterParams();
+
+    this.router.navigate(['/gifts'],
+    { queryParams: queryParamsObj}
+    );
     this.giftIdeas = this.http.getAllGifts(this.pageNumber, this.pageSize, SortingModel[this.selectedSorting], this.filterModel)
     .pipe(
      catchError(err => {
@@ -119,16 +121,34 @@ export class GiftsListComponent implements OnInit, OnDestroy {
   search(): void{
         // Dodac jezeli inne od defoltowych
                 // tslint:disable-next-line:max-line-length
-    this.router.navigate(['/gifts'], { queryParams: { pageNumber: this.pageNumber,  pageSize: this.pageSize, sort: SortingModel[this.selectedSorting], author: this.filterModel.author, giftName: this.filterModel.giftName, categoryID: this.filterModel.categoryID  } });
-    this.giftIdeas = this.http.getAllGifts(this.pageNumber, this.pageSize, SortingModel[this.selectedSorting], this.filterModel)
-    .pipe(
-     catchError(err => {
-        this.errorObject = err;
-        return throwError(err);
-      })
-    );
 
+const queryParamsObj = this.prepareRouterParams();
 
+this.router.navigate(['/gifts'],
+{ queryParams: queryParamsObj}
+);
+this.giftIdeas = this.http.getAllGifts(this.pageNumber, this.pageSize, SortingModel[this.selectedSorting], this.filterModel)
+.pipe(
+ catchError(err => {
+    this.errorObject = err;
+    return throwError(err);
+  })
+);
+  }
+
+  prepareRouterParams(): object{
+    const queryParamsObj = {};
+
+    console.log(SortingModel[this.selectedSorting]);
+    if (this.pageNumber > 1) { queryParamsObj['pageNumber'] = this.pageNumber.toString(); }
+    if (this.pageSize !== 5) { queryParamsObj['pageSize'] = this.pageSize.toString(); }
+    // tslint:disable-next-line:max-line-length
+    if (SortingModel[this.selectedSorting] !== SortingModel[SortingModel.Latest]) { queryParamsObj['selectedSorting'] = SortingModel[this.selectedSorting].toString(); }
+    if (this.filterModel.author.length > 0 ) { queryParamsObj['author'] = this.filterModel.author; }
+    if (this.filterModel.giftName.length > 0 ) { queryParamsObj['giftName'] = this.filterModel.giftName; }
+    if (this.filterModel.categoryID > -1 ) { queryParamsObj['categoryID'] = this.filterModel.categoryID; }
+
+    return queryParamsObj;
   }
 
 }
