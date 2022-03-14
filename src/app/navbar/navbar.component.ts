@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faGifts, faLeaf } from '@fortawesome/free-solid-svg-icons';
+import { faGifts } from '@fortawesome/free-solid-svg-icons';
 import { interval, Observable } from 'rxjs';
 import { HttpGiftsService } from '../services/http-gifts.service';
 
