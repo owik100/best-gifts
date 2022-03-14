@@ -1,20 +1,47 @@
-a{
-    color:deeppink;
+a {
+  color: deeppink;
 }
 
-h1, h2, h3{
-        text-align: center;
+h1,
+h2,
+h3 {
+  text-align: center;
 }
 
 form {
-    width: 90%;
+  width: 90%;
+}
+
+#nameInput {
+  width: 80%;
+  margin-right: 0.5vw;
+}
+
+#submitBtn {
+  width: 19%;
+}
+
+a {
+  margin-right: 1vw;
+  background: #4285F4;
+  color: white;
+  font-size: 30px;
+  line-height: 60px;
+  height: auto;
+  width: auto;
+}
+
+.containerForm {
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+#giftListBtn {
+  margin: 10px 10px;
+}
+
+@media only screen and (max-width: 584px) {
+   #submitBtn, #nameInput {
+    width: 100%;
   }
-  
-  #nameInput {
-    width: 80%;
-    margin-right: 10px;
-  }
-  
-  #submitBtn {
-    width: 19%;
-  }
+}

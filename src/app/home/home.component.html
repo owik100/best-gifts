@@ -5,13 +5,20 @@
     <form #giftSearchForm="ngForm" (ngSubmit)="searchGift();">
     
         <mat-form-field id="nameInput" appearance="legacy">
-          <mat-label>Wpisz nazwę szukanwgo prezentu!</mat-label>
+          <mat-label>Wpisz nazwę szukanego prezentu!</mat-label>
           <input rows="5" required matInput type="text" [(ngModel)]="filterModel.giftName" name="description" />
         </mat-form-field>
       
-      <button id="submitBtn" [disabled]="giftSearchForm.invalid" mat-raised-button color="primary" type="submit">Szukaj</button>
+      <button id="submitBtn" [disabled]="giftSearchForm.invalid" mat-raised-button color="primary" type="submit">Szukaj <mat-icon aria-hidden="false" aria-label="Search icon">search</mat-icon></button>
     </form>
 </div>
+
+<br/>
+<div class="containerForm">
+    <a id="giftListBtn" mat-raised-button color="primary" routerLink="/gifts" ><fa-icon [icon]="faGifts"></fa-icon>   Lista prezentów</a>
+    <a mat-raised-button color="primary" routerLink="/add"  ><fa-icon [icon]="faPlus"></fa-icon>   Dodaj prezent</a>
+</div>
+
 
 <h2>Best gifts to miejsce w którym znajdziesz setki pomysłow na prezenty. Jak wszyscy doskonale wiemy najważniejsza jest pamięć i intencje. Ale w parze z nimi może iść świetnie dobrany prezent 😊</h2>
 <h2>Znajdziesz tu prezenty przygotowane na każdą okazję - urodziny, rocznice, święta i wiele innych! 🎂</h2>
@@ -19,11 +26,9 @@
 <h2>U nas najważniejsi są użytkownicy i społeczność która dzieli się swoimi pomysłami. Jeżeli masz pomysł na ciekawy prezent, nie wachaj się i dodaj go! 👪</h2>
 <h2>Dzięki systemowi głosowania i komentarzy bez problemu odnajdziesz u nas dokładnie taki prezent jakiego szukasz i będziesz miał pewność wysokiej jakośći ⭐</h2>
 
-<a mat-raised-button color="primary" routerLink="/gifts" class="center" ><fa-icon [icon]="faGifts"></fa-icon>   Lista prezentów</a>
-<a mat-raised-button color="primary" routerLink="/add" class="center" ><fa-icon [icon]="faPlus"></fa-icon>   Dodaj prezent</a>
+
 <!-- <img class="img-fluid" src="/assets/images/giftsMainPage.jpg"> -->
 
 <br/>
-<p>Szukaj</p>
 <p>Gif</p>
 <p>Random</p>

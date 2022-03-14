@@ -23,6 +23,7 @@ import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator'
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatSelectModule} from '@angular/material/select';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatIconModule} from '@angular/material/icon';
 
 // Others
 import { ShareButtonModule } from 'ngx-sharebuttons/button';
@@ -88,7 +89,8 @@ import { PostGiftComponent } from './post-gift/post-gift.component';
     MatAutocompleteModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatIconModule
   ],
   providers: [CookieService,
     {provide: MatPaginatorIntl, useClass: PLPaginatorIntl}],
