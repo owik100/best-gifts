@@ -31,7 +31,8 @@ a:hover{
 }
 
 .imgContainer{
-    height: 35vh;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 #paginationSorting, #searchPanel{
@@ -46,3 +47,24 @@ a:hover{
 .matFormFilter{
     margin-right: 15px;
 }
+
+@media only screen and (max-width: 767px) {
+    .matFormFilter  {
+      width: 100%;
+    }
+  
+    #filterBtn {
+      width: 100%;
+    }
+  }
+
+.title{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#searchPanel{
+    margin-bottom: 10px;
+}
+

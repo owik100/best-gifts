@@ -13,6 +13,7 @@
     </mat-form-field>
 
     <mat-paginator
+    class="paginatorGifts"
     [length]="ideas.totalItems"
     [pageSize]="ideas.pageSize"
     [pageIndex]="ideas.currentPage - 1"
@@ -22,9 +23,7 @@
     </mat-paginator>
   </div>
 
-  <div id="searchPanel">
-
-
+<div id="searchPanel">
 <mat-expansion-panel (opened)="panelOpenState = true"
   (closed)="panelOpenState = false">
 
@@ -45,7 +44,7 @@
       <input matInput type="text" [(ngModel)]="filterModel.author" name="author"/>
     </mat-form-field>
 
-    <mat-form-field appearance="legacy">
+    <mat-form-field appearance="legacy" class="matFormFilter">
       <mat-label>Kategoria</mat-label>
       <mat-select (selectionChange)="onCategoryChange($event)">
         <mat-option *ngFor="let cat of allCategoriesObj" [value]="cat.categoryId">
@@ -63,14 +62,16 @@
               <ng-container *ngFor="let giftIdea of ideas.items">
                 <div class="card col col-lg-3 col-md-4 col-sm-8 col-12" style="margin-bottom: 5px;">
 
-                    <div class="imgContainer">
-                        <a class="card-title" [routerLink]="['/gift', giftIdea.giftIdeaId]"><h2 class="text-center">{{giftIdea.name}}</h2>
+             
+                        <a class="card-title" [routerLink]="['/gift', giftIdea.giftIdeaId]"><h2 class="text-center title">{{giftIdea.name}}</h2>
+                          <div class="imgContainer">
                           <img class="img-fluid" *ngIf="giftIdea.imageContentB64; else defaultImage" src="{{giftIdea.imageContentB64}}"/>
                           <ng-template #defaultImage>
                             <img class="img-fluid" mat-card-image src="/assets/images/gift.png" alt="Gift image"/>
                           </ng-template>
+                        </div>
                         </a>
-                    </div>
+     
 
                     <div class="mt-2">
                       <mat-divider></mat-divider>
