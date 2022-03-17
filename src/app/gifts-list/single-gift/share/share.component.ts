@@ -11,6 +11,7 @@ export class ShareComponent implements OnInit {
 
 isMobile: boolean;
 currentUrl: string;
+desc = 'Sprawdź ten super prezent!';
 
   constructor(private mobileCheck: MobileCheckService, private router: Router ) { }
 

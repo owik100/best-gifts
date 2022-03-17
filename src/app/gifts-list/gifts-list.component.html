@@ -57,10 +57,10 @@
 </mat-expansion-panel>
 
 </div>
-          <div class="container px-4">
-            <div class="row gy-3 gx-5">
+          <div class="container ">
+            <div class="row gy-3">
               <ng-container *ngFor="let giftIdea of ideas.items">
-                <div class="card col col-lg-3 col-md-4 col-sm-8 col-12" style="margin-bottom: 5px;">
+                <div class="card col col-lg-3 col-md-4 col-sm-8 col-12" style="margin-bottom: 5px; justify-content: space-between;">
 
              
                         <a class="card-title" [routerLink]="['/gift', giftIdea.giftIdeaId]"><h2 class="text-center title">{{giftIdea.name}}</h2>
@@ -75,13 +75,13 @@
 
                     <div class="mt-2">
                       <mat-divider></mat-divider>
-                    </div>
+                   
 
                   <div class ="rating">
                     <h3>Polubienia:</h3>
                     <span class="circle" [ngClass]="giftIdea.likesCounter > 0 ? 'rankingPositive' : giftIdea.likesCounter < 0 ? 'rankingNegative' : '' ">{{giftIdea.likesCounter}}</span>
                   </div>
-
+                </div>
                 </div>
 
 

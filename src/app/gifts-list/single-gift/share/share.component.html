@@ -1,18 +1,18 @@
 <h2>Udostępnij:</h2>
 <div class="shareContainer">
-  <share-button [theme]="'circles-dark'" [button]="'facebook'" [showText]="true" [url]="currentUrl">
+  <share-button [theme]="'circles-dark'" [button]="'facebook'" [showText]="true" [url]="currentUrl" [description]="desc">
   </share-button>
 
-  <share-button *ngIf="isMobile" [theme]="'circles-dark'" [button]="'messenger'" [showText]="true" [url]="currentUrl">
+  <share-button *ngIf="isMobile" [theme]="'circles-dark'" [button]="'messenger'" [showText]="true" [url]="currentUrl" [description]="desc">
   </share-button>
 
-  <share-button [theme]="'circles-dark'" [button]="'twitter'" [showText]="true" [url]="currentUrl">
+  <share-button [theme]="'circles-dark'" [button]="'twitter'" [showText]="true" [url]="currentUrl" [description]="desc">
   </share-button>
 
-  <share-button [theme]="'circles-dark'" [button]="'email'" [showText]="true" [url]="currentUrl">
+  <share-button [theme]="'circles-dark'" [button]="'email'" [showText]="true" [url]="currentUrl" [description]="desc">
   </share-button>
 
-  <share-button [theme]="'circles-dark'" [button]="'copy'" [showText]="true" [url]="currentUrl">
+  <share-button [theme]="'circles-dark'" [button]="'copy'" [showText]="true" [url]="currentUrl" [description]="desc">
   </share-button>
 
 </div>
