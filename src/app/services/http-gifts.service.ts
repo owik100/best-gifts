@@ -9,6 +9,7 @@ import { CategoryDTO } from '../models/CategoryDTO';
 import { ImageHelperService } from './image-helper.service';
 import { SortingModel } from '../models/SortingModel';
 import { FilterModel } from '../models/FilterModel';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -16,7 +17,7 @@ import { FilterModel } from '../models/FilterModel';
 })
 export class HttpGiftsService {
 
-  private urlAPI = 'https://localhost:44302/api';
+  private urlAPI = environment.urlAPI;
 
   constructor(private http: HttpClient, private imageHelper: ImageHelperService) {
 
