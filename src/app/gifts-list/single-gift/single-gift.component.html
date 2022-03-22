@@ -5,7 +5,7 @@
       <div class="col-md-6 col-sm-12"> 
         <img class="img-fluid" *ngIf="singleGift.imageContentB64; else defaultImage" src="{{singleGift.imageContentB64}}"/>
         <ng-template #defaultImage>
-          <img class="img-fluid"  mat-card-image src="/assets/images/gift.png" alt="Gift image"/>
+          <img class="img-fluid"  mat-card-image src="./assets/images/gift.png" alt="Gift image"/>
         </ng-template>
       </div>
       <div class="col-md-6"> 
