@@ -1,6 +1,8 @@
 # BestGifts
 Web application created in Angular 11.2.14 <img src="https://avatars.githubusercontent.com/u/139426?s=200&v=4" width="32" height="32"> For [BestGiftsAPI](https://github.com/owik100/BestGiftsAPI)
 <br/>
+Preview available [here](https://owik100.github.io/best-gifts/)
+<br/>
 <br/>
 <img src="https://github.com/owik100/Portfolio/blob/gh-pages/images/Projects/Best%20Gifts/Best%20gifts.gif" width="480" height="456">
 
